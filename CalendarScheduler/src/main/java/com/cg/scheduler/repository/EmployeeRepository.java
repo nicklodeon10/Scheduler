@@ -11,15 +11,14 @@ import org.springframework.stereotype.Repository;
 import com.cg.scheduler.dto.Employee;
 
 /**
- * @author Devang
- * created: 04/11/2019
+ * @author Devang created: 04/11/2019
  *
  */
 @Repository("employeeRepository")
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 	public List<Employee> findByEmpName(String empName);
-	
+
 	public List<Employee> findByEmpEmail(String empEmail);
-	
+
 }

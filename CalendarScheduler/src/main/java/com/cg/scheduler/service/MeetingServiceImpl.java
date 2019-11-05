@@ -64,7 +64,7 @@ public class MeetingServiceImpl implements MeetingService {
 			meeting = meetingRepository.findById(meetingId).get();
 			meeting.setActive(false);
 			meetingRepository.save(meeting);
-		}catch(Exception exception) {
+		} catch (Exception exception) {
 			throw new MeetingException("Error Cancelling Meeting.");
 		}
 		return true;

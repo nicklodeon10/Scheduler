@@ -12,12 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
- * @author Devang
- * created: 04/11/2019
+ * @author Devang created: 04/11/2019
  *
  */
 
-@Entity(name="Notification")
+@Entity(name = "Notification")
 public class Notification {
 
 	@Id
@@ -29,7 +28,7 @@ public class Notification {
 	private String notMessage;
 	private LocalDateTime notTime;
 	private boolean seen;
-	
+
 	public Notification() {
 		super();
 	}
@@ -164,5 +163,5 @@ public class Notification {
 	public void setSeen(boolean seen) {
 		this.seen = seen;
 	}
-	
+
 }

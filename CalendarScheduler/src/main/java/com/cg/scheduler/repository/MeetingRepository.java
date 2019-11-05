@@ -9,8 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.cg.scheduler.dto.Meeting;
 
 /**
- * @author Devang
- * created: 04/11/2019
+ * @author Devang created: 04/11/2019
  *
  */
 @Repository("meetingRepository")

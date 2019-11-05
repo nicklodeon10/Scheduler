@@ -34,9 +34,8 @@ public class NotificationServiceImpl implements NotificationService {
 	public Notification add(Notification notification) throws NotificationException {
 		Notification addedNotification;
 		try {
-			addedNotification=notificationRepository.save(notification);
-		}
-		catch(Exception exception) {
+			addedNotification = notificationRepository.save(notification);
+		} catch (Exception exception) {
 			throw new NotificationException("Error Adding Notification.");
 		}
 		return addedNotification;
@@ -44,8 +43,8 @@ public class NotificationServiceImpl implements NotificationService {
 
 	@Override
 	public List<Notification> read() throws NotificationException {
-		List<Notification> notificationList=notificationRepository.findAll();
-		if(notificationList.size()==0) {
+		List<Notification> notificationList = notificationRepository.findAll();
+		if (notificationList.size() == 0) {
 			throw new NotificationException("No Notifications Found.");
 		}
 		return notificationList;
@@ -55,9 +54,8 @@ public class NotificationServiceImpl implements NotificationService {
 	public Notification update(Notification notification) throws NotificationException {
 		Notification updatedNotification;
 		try {
-			updatedNotification=notificationRepository.save(notification);
-		}
-		catch(Exception exception) {
+			updatedNotification = notificationRepository.save(notification);
+		} catch (Exception exception) {
 			throw new NotificationException("Error Updating Notification.");
 		}
 		return updatedNotification;
@@ -67,8 +65,7 @@ public class NotificationServiceImpl implements NotificationService {
 	public boolean delete(Long notId) throws NotificationException {
 		try {
 			notificationRepository.deleteById(notId);
-		}
-		catch(Exception exception) {
+		} catch (Exception exception) {
 			throw new NotificationException("Error Deleting Notification.");
 		}
 		return true;
@@ -76,11 +73,12 @@ public class NotificationServiceImpl implements NotificationService {
 
 	@Override
 	public List<Notification> searchByEmpId(Long empId) throws NotificationException {
-		List<Notification> notificationList=notificationRepository.findByToEmp(employeeRepository.findById(empId).get());
-		if(notificationList.size()==0) {
+		List<Notification> notificationList = notificationRepository
+				.findByToEmp(employeeRepository.findById(empId).get());
+		if (notificationList.size() == 0) {
 			throw new NotificationException("No Notification Found.");
 		}
-		return notificationList; 
+		return notificationList;
 	}
 
 	@Override

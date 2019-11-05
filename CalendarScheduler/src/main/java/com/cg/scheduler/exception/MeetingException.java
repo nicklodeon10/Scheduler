@@ -4,11 +4,10 @@
 package com.cg.scheduler.exception;
 
 /**
- * @author Devang
- * created: 04/11/2019
+ * @author Devang created: 04/11/2019
  *
  */
-public class MeetingException extends Exception{
+public class MeetingException extends Exception {
 
 	/**
 	 * 
@@ -18,9 +17,9 @@ public class MeetingException extends Exception{
 	public MeetingException() {
 		super();
 	}
-	
+
 	public MeetingException(String message) {
 		super(message);
 	}
-	
+
 }

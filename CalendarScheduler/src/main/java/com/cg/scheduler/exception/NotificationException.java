@@ -4,11 +4,10 @@
 package com.cg.scheduler.exception;
 
 /**
- * @author Devang
- * created: 04/11/2019
+ * @author Devang created: 04/11/2019
  *
  */
-public class NotificationException extends Exception{
+public class NotificationException extends Exception {
 
 	/**
 	 * 
@@ -18,9 +17,9 @@ public class NotificationException extends Exception{
 	public NotificationException() {
 		super();
 	}
-	
+
 	public NotificationException(String message) {
 		super(message);
 	}
-	
+
 }

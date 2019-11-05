@@ -12,12 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 /**
- * @author Devang
- * created: 04/11/2019
+ * @author Devang created: 04/11/2019
  *
  */
 
-@Entity(name="Employee")
+@Entity(name = "Employee")
 public class Employee {
 
 	@Id
@@ -35,7 +34,7 @@ public class Employee {
 	@OneToMany(mappedBy = "organiser")
 	private List<Meeting> meetings;
 	private boolean active;
-	
+
 	public Employee() {
 		super();
 	}
@@ -239,5 +238,5 @@ public class Employee {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
+
 }

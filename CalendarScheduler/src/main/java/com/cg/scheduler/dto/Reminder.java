@@ -12,12 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
- * @author Devang
- * created: 04/11/2019
+ * @author Devang created: 04/11/2019
  *
  */
 
-@Entity(name="Reminder")
+@Entity(name = "Reminder")
 public class Reminder {
 
 	@Id
@@ -28,7 +27,7 @@ public class Reminder {
 	private Employee emp;
 	private LocalDateTime dueTime;
 	private boolean active;
-	
+
 	public Reminder() {
 		super();
 	}

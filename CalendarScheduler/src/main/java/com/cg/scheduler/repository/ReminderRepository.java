@@ -12,8 +12,7 @@ import com.cg.scheduler.dto.Employee;
 import com.cg.scheduler.dto.Reminder;
 
 /**
- * @author Devang
- * created: 04/11/2019
+ * @author Devang created: 04/11/2019
  *
  */
 
@@ -21,5 +20,5 @@ import com.cg.scheduler.dto.Reminder;
 public interface ReminderRepository extends JpaRepository<Reminder, Long> {
 
 	List<Reminder> findByEmp(Employee emp);
-	
+
 }

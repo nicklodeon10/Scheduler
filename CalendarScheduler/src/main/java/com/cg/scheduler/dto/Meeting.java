@@ -12,8 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
- * @author Devang
- * created: 04/11/2019
+ * @author Devang created: 04/11/2019
  *
  */
 

@@ -12,13 +12,12 @@ import com.cg.scheduler.dto.Employee;
 import com.cg.scheduler.dto.Notification;
 
 /**
- * @author Devang
- * created: 04/11/2019
+ * @author Devang created: 04/11/2019
  *
  */
 @Repository("notificationRepository")
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
-	
+
 	List<Notification> findByToEmp(Employee toEmp);
-	
+
 }

@@ -9,7 +9,7 @@ import com.cg.scheduler.dto.Notification;
 import com.cg.scheduler.exception.NotificationException;
 
 /**
- * @author Admin
+ * @author Devang created: 04/11/2019
  *
  */
 public interface NotificationService {

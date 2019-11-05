@@ -35,8 +35,8 @@ public class ReminderServiceImpl implements ReminderService {
 	public Reminder create(Reminder reminder) throws ReminderException {
 		Reminder addedReminder;
 		try {
-			addedReminder=reminderRepository.save(reminder);
-		}catch (Exception exception) {
+			addedReminder = reminderRepository.save(reminder);
+		} catch (Exception exception) {
 			throw new ReminderException("Error Adding Reminder.");
 		}
 		return addedReminder;
@@ -44,8 +44,8 @@ public class ReminderServiceImpl implements ReminderService {
 
 	@Override
 	public List<Reminder> read() throws ReminderException {
-		List<Reminder> reminderList=reminderRepository.findAll();
-		if(reminderList.size()==0) {
+		List<Reminder> reminderList = reminderRepository.findAll();
+		if (reminderList.size() == 0) {
 			throw new ReminderException("No Reminders Found.");
 		}
 		return reminderList;
@@ -55,8 +55,8 @@ public class ReminderServiceImpl implements ReminderService {
 	public Reminder update(Reminder reminder) throws ReminderException {
 		Reminder updatedReminder;
 		try {
-			updatedReminder=reminderRepository.save(reminder);
-		}catch (Exception exception) {
+			updatedReminder = reminderRepository.save(reminder);
+		} catch (Exception exception) {
 			throw new ReminderException("Error Updating Reminder.");
 		}
 		return updatedReminder;
@@ -68,7 +68,7 @@ public class ReminderServiceImpl implements ReminderService {
 			Reminder reminder = reminderRepository.findById(remId).get();
 			reminder.setActive(false);
 			reminderRepository.save(reminder);
-		}catch(Exception exception) {
+		} catch (Exception exception) {
 			throw new ReminderException("Error Cancelling Reminder.");
 		}
 		return true;
@@ -76,8 +76,8 @@ public class ReminderServiceImpl implements ReminderService {
 
 	@Override
 	public List<Reminder> searchByEmpId(Long empId) throws ReminderException {
-		List<Reminder> reminderList=reminderRepository.findByEmp(employeeRepository.findById(empId).get());
-		if(reminderList.size()==0) {
+		List<Reminder> reminderList = reminderRepository.findByEmp(employeeRepository.findById(empId).get());
+		if (reminderList.size() == 0) {
 			throw new ReminderException("No Reminders Found.");
 		}
 		return reminderList;
