@@ -6,6 +6,7 @@ package com.cg.scheduler.service;
 import java.util.List;
 
 import com.cg.scheduler.dto.Notification;
+import com.cg.scheduler.exception.NotificationException;
 
 /**
  * @author Admin
@@ -13,16 +14,16 @@ import com.cg.scheduler.dto.Notification;
  */
 public interface NotificationService {
 
-	public Notification add(Notification notification);
-	
-	public List<Notification> read();
-	
-	public Notification update(Notification notification);
-	
-	public boolean delete(Long notId);
-	
-	public List<Notification> searchByEmpId(Long empId);
-	
-	public List<Notification> viewUnseen(Long empId);
-	
+	public Notification add(Notification notification) throws NotificationException;
+
+	public List<Notification> read() throws NotificationException;
+
+	public Notification update(Notification notification) throws NotificationException;
+
+	public boolean delete(Long notId) throws NotificationException;
+
+	public List<Notification> searchByEmpId(Long empId) throws NotificationException;
+
+	public List<Notification> viewUnseen(Long empId) throws NotificationException;
+
 }

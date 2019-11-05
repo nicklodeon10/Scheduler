@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.scheduler.dto.Employee;
+import com.cg.scheduler.exception.EmployeeException;
 import com.cg.scheduler.repository.EmployeeRepository;
 
 /**
@@ -27,35 +28,63 @@ public class EmployeeServiceImpl implements EmployeeService {
 	EmployeeRepository employeeRepository;
 
 	@Override
-	public Employee create(Employee employee) {
-		return employeeRepository.save(employee);
+	public Employee create(Employee employee) throws EmployeeException {
+		Employee emp;
+		try {
+			emp=employeeRepository.save(employee);
+		}catch(Exception exception) {
+			throw new EmployeeException("Error Adding Employee.");
+		}		
+		return emp;
 	}
 
 	@Override
-	public List<Employee> read() {
-		return employeeRepository.findAll();
+	public List<Employee> read() throws EmployeeException {
+		List<Employee> empList=employeeRepository.findAll();
+		if(empList.size()==0) {
+			throw new EmployeeException("No Employee Found.");
+		}
+		return empList;
 	}
 
 	@Override
-	public Employee searchByName(String name) {
-		return employeeRepository.findByEmpName(name).get(0);
+	public Employee searchByName(String name) throws EmployeeException {
+		Employee emp=employeeRepository.findByEmpName(name).get(0);
+		if(emp==null) {
+			throw new EmployeeException("Employee Not Found.");
+		}
+		return emp;
 	}
 
 	@Override
-	public Employee searchByEmail(String email) {
-		return employeeRepository.findByEmpEmail(email).get(0);
+	public Employee searchByEmail(String email) throws EmployeeException {
+		Employee emp=employeeRepository.findByEmpEmail(email).get(0);
+		if(emp==null) {
+			throw new EmployeeException("Employee Not Found.");
+		}
+		return emp;
 	}
 
 	@Override
-	public Employee update(Employee employee) {
-		return employeeRepository.save(employee);
+	public Employee update(Employee employee) throws EmployeeException {
+		Employee emp;
+		try {
+			emp=employeeRepository.save(employee);
+		}catch(Exception exception) {
+			throw new EmployeeException("Error Updating Employee.");
+		}		
+		return emp;
 	}
 
 	@Override
-	public boolean delete(Long empId) {
-		Employee emp=employeeRepository.findById(empId).get();
-		emp.setActive(false);
-		employeeRepository.save(emp);
+	public boolean delete(Long empId) throws EmployeeException {
+		try {
+			Employee emp=employeeRepository.findById(empId).get();
+			emp.setActive(false);
+			employeeRepository.save(emp);
+		}catch(Exception exception) {
+			throw new EmployeeException("Error Deleting Employee.");
+		}
 		return true;
 	}
 
