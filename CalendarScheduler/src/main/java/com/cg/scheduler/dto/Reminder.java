@@ -6,6 +6,7 @@ package com.cg.scheduler.dto;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +24,7 @@ public class Reminder {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long remId;
 	private String remMessage;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Employee emp;
 	private LocalDateTime dueTime;
 	private boolean active;
@@ -39,12 +40,6 @@ public class Reminder {
 		this.emp = emp;
 		this.dueTime = dueTime;
 		this.active = active;
-	}
-
-	@Override
-	public String toString() {
-		return "Reminder [remId=" + remId + ", remMessage=" + remMessage + ", emp=" + emp + ", dueTime=" + dueTime
-				+ ", active=" + active + "]";
 	}
 
 	@Override
@@ -103,6 +98,12 @@ public class Reminder {
 			return false;
 		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "Reminder [remId=" + remId + ", remMessage=" + remMessage + ", emp=" + emp + ", dueTime=" + dueTime
+				+ ", active=" + active + "]";
 	}
 
 	public Long getRemId() {

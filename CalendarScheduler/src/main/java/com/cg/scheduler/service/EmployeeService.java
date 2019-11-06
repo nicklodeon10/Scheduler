@@ -21,6 +21,8 @@ public interface EmployeeService {
 	public Employee searchByName(String name) throws EmployeeException;
 
 	public Employee searchByEmail(String email) throws EmployeeException;
+	
+	public Employee searchById(Long empId) throws EmployeeException;
 
 	public Employee update(Employee employee) throws EmployeeException;
 

@@ -38,6 +38,9 @@ public class NotificationServiceImpl implements NotificationService {
 		} catch (Exception exception) {
 			throw new NotificationException("Error Adding Notification.");
 		}
+		addedNotification.getToEmp().setNotifications(null);
+		addedNotification.getToEmp().setReminders(null);
+		addedNotification.getToEmp().setMeetings(null);
 		return addedNotification;
 	}
 
@@ -82,6 +85,15 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
+	public Notification searchByNotId(Long notId) throws NotificationException {
+		Notification notification = notificationRepository.findById(notId).get();
+		if (notification == null) {
+			throw new NotificationException("Notification not found.");
+		}
+		return notification;
+	}
+
+	@Override
 	public List<Notification> viewUnseen(Long empId) throws NotificationException {
 		List<Notification> notificationList = searchByEmpId(empId);
 		for (Notification notification : notificationList) {
@@ -90,6 +102,13 @@ public class NotificationServiceImpl implements NotificationService {
 			}
 		}
 		return notificationList;
+	}
+
+	@Override
+	public boolean setAsSeen(Long notId) throws NotificationException {
+		Notification notification = searchByNotId(notId);
+		notification.setSeen(true);
+		return true;
 	}
 
 }

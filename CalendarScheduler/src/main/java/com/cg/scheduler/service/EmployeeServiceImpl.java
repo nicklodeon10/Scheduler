@@ -65,6 +65,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
+	public Employee searchById(Long empId) throws EmployeeException {
+		Employee emp = employeeRepository.findById(empId).get();
+		if (emp == null) {
+			throw new EmployeeException("Employee Not Found.");
+		}
+		return emp;
+	}
+
+	@Override
 	public Employee update(Employee employee) throws EmployeeException {
 		Employee emp;
 		try {

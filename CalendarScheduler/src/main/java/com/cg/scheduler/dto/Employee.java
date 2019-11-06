@@ -6,6 +6,7 @@ package com.cg.scheduler.dto;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,11 +28,11 @@ public class Employee {
 	private String empPassword;
 	private String empPhone;
 	private String empEmail;
-	@OneToMany(mappedBy = "toEmp")
+	@OneToMany(mappedBy = "toEmp", fetch = FetchType.LAZY)
 	private List<Notification> notifications;
-	@OneToMany(mappedBy = "emp")
+	@OneToMany(mappedBy = "emp", fetch = FetchType.LAZY)
 	private List<Reminder> reminders;
-	@OneToMany(mappedBy = "organiser")
+	@OneToMany(mappedBy = "organiser", fetch = FetchType.LAZY)
 	private List<Meeting> meetings;
 	private boolean active;
 
@@ -52,13 +53,6 @@ public class Employee {
 		this.reminders = reminders;
 		this.meetings = meetings;
 		this.active = active;
-	}
-
-	@Override
-	public String toString() {
-		return "Employee [empId=" + empId + ", empName=" + empName + ", userName=" + userName + ", empPassword="
-				+ empPassword + ", empPhone=" + empPhone + ", empEmail=" + empEmail + ", notifications=" + notifications
-				+ ", reminders=" + reminders + ", meetings=" + meetings + ", active=" + active + "]";
 	}
 
 	@Override
@@ -157,6 +151,13 @@ public class Employee {
 			return false;
 		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "Employee [empId=" + empId + ", empName=" + empName + ", userName=" + userName + ", empPassword="
+				+ empPassword + ", empPhone=" + empPhone + ", empEmail=" + empEmail + ", notifications=" + notifications
+				+ ", reminders=" + reminders + ", meetings=" + meetings + ", active=" + active + "]";
 	}
 
 	public Long getEmpId() {

@@ -17,6 +17,8 @@ public interface MeetingService {
 	public Meeting addMeeting(Meeting meeting) throws MeetingException;
 
 	public List<Meeting> read() throws MeetingException;
+	
+	public List<Meeting> viewOrganisedByEmployee(Long empId) throws MeetingException;
 
 	public Meeting update(Meeting meeting) throws MeetingException;
 
@@ -27,5 +29,9 @@ public interface MeetingService {
 	public Meeting maybe(Long empId, Long meetingId) throws MeetingException;
 
 	public Meeting cancel(Long empId, Long meetingId) throws MeetingException;
+	
+	public List<Meeting> viewUpcoming(Long empId) throws MeetingException;
+	
+	public List<Meeting> viewPastMeetings(Long empId) throws MeetingException;
 
 }

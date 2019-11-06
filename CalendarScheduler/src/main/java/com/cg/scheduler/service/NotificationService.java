@@ -23,7 +23,11 @@ public interface NotificationService {
 	public boolean delete(Long notId) throws NotificationException;
 
 	public List<Notification> searchByEmpId(Long empId) throws NotificationException;
+	
+	public Notification searchByNotId(Long notId) throws NotificationException;
 
 	public List<Notification> viewUnseen(Long empId) throws NotificationException;
+	
+	public boolean setAsSeen(Long notId) throws NotificationException;
 
 }

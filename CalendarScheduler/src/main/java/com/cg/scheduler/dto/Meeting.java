@@ -6,6 +6,7 @@ package com.cg.scheduler.dto;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +26,7 @@ public class Meeting {
 	private String meetingTitle;
 	private LocalDateTime startTime;
 	private LocalDateTime endTime;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Employee organiser;
 	private String participants;
 	private String participantStatus;
@@ -48,13 +49,6 @@ public class Meeting {
 		this.participantStatus = participantStatus;
 		this.location = location;
 		this.active = active;
-	}
-
-	@Override
-	public String toString() {
-		return "Meeting [meetingId=" + meetingId + ", meetingTitle=" + meetingTitle + ", startTime=" + startTime
-				+ ", endTime=" + endTime + ", organiser=" + organiser + ", participants=" + participants
-				+ ", participantStatus=" + participantStatus + ", location=" + location + ", active=" + active + "]";
 	}
 
 	@Override
@@ -145,6 +139,13 @@ public class Meeting {
 			return false;
 		}
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "Meeting [meetingId=" + meetingId + ", meetingTitle=" + meetingTitle + ", startTime=" + startTime
+				+ ", endTime=" + endTime + ", organiser=" + organiser + ", participants=" + participants
+				+ ", participantStatus=" + participantStatus + ", location=" + location + ", active=" + active + "]";
 	}
 
 	public Long getMeetingId() {
