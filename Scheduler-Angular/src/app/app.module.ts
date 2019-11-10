@@ -8,11 +8,13 @@ import { DashboardComponent } from './app.dashboardcomponent';
 import {ErrorPageComponent} from './app.errorpagecomponent';
 import { LoginComponent } from './app.logincomponent';
 import { RegisterComponent } from './app.registercomponent';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
     imports: [
-        BrowserModule        
+        BrowserModule,
+        HttpClientModule      
     ],
     declarations: [
         AppComponent,

@@ -1,0 +1,58 @@
+Employee Controller:
+@RequestMapping("employee")
+@PostMapping("add")
+	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
+@GetMapping("search/email")
+	public ResponseEntity<Employee> searchEmployeeByEmail(@RequestParam("empEmail") String email){
+@GetMapping("search/name")
+	public ResponseEntity<Employee> searchEmployeeByName(@RequestParam("empName") String name){
+
+
+Meeting Controller:
+@RequestMapping("meeting")
+@PostMapping("add")
+public ResponseEntity<Meeting> scheduleMeeting(@RequestBody Meeting meeting,
+			@RequestParam("organiserId") Long organiserId)
+@GetMapping("view")
+	public ResponseEntity<List<Meeting>> getMeetingsForEmployee(@RequestParam("empId") Long empId)
+@PostMapping("cancel")
+	public ResponseEntity<String> cancelMeeting(@RequestParam("meetingId") Long meetingId)
+@PostMapping("respond/approve")
+	public ResponseEntity<Meeting> respondApproveMeeting(@RequestParam("empId") Long empId,
+			@RequestParam("meetingId") Long meetingId) {
+@PostMapping("respond/maybe")
+	public ResponseEntity<Meeting> respondMaybeMeeting(@RequestParam("empId") Long empId,
+			@RequestParam("meetingId") Long meetingId) {
+@PostMapping("respond/cancel")
+	public ResponseEntity<Meeting> respondCancelMeeting(@RequestParam("empId") Long empId,
+			@RequestParam("meetingId") Long meetingId) {
+@GetMapping("upcoming/view")
+	public ResponseEntity<List<Meeting>> viewUpcomingMeetings(@RequestParam("empId") Long empId){
+@GetMapping("past/view")
+	public ResponseEntity<List<Meeting>> viewPastMeetings(@RequestParam("empId") Long empId){
+@GetMapping("getCount")
+	public ResponseEntity<Integer> getCount(@RequestParam("empId")Long empId){
+
+Notification Controller:
+@RequestMapping("notification")
+@GetMapping("viewById")
+	public ResponseEntity<List<Notification>> employeeNotifications(@RequestParam("empId") Long empId){
+@GetMapping("viewByNotId")
+	public ResponseEntity<Notification> viewByNotId(@RequestParam("notId") Long notId){
+@GetMapping("viewUnseen")
+	public ResponseEntity<List<Notification>> viewUnseen(@RequestParam("empId") Long empId){
+@PostMapping("setSeen")
+	public ResponseEntity<Boolean> setAsSeen(@RequestParam("notId")Long notId) {
+@GetMapping("getCount")
+	public ResponseEntity<Integer> viewCount(@RequestParam("empId")Long empId){
+
+Reminder Controller:
+@RequestMapping("reminder")
+@PostMapping("add")
+	public ResponseEntity<Reminder> addReminder(@RequestBody Reminder reminder, @RequestParam("empId") Long empId) {
+@GetMapping("view")
+	public ResponseEntity<List<Reminder>> viewAllReminders(@RequestParam("empId") Long empId){
+@DeleteMapping("cancel")
+	public ResponseEntity<String> deleteReminder(@RequestParam("remId") Long reminderId) {
+@GetMapping("getCount")
+	public ResponseEntity<Integer> getCount(@RequestParam("empId")Long empId){

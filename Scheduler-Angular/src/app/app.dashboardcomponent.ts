@@ -1,9 +1,34 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { Meeting } from './_model/app.meeting';
+import { MeetingService } from './_service/app.meetingservice';
+import { ReminderService } from './_service/app.reminderservice';
+import { NotificationService } from './_service/app.notificationservice';
+import { Reminder } from './_model/app.reminder';
 
 @Component({
     selector: 'dashboard',
     templateUrl: '/_pages/app.dashboard.html'
 })
-export class DashboardComponent{
+export class DashboardComponent implements OnInit{
+
+    empId=3;
+
+    upcMeetingsCount:number;
+    upcReminderCount:number;
+    upcNotificationCount:number;
+    nextMeeting:Meeting;
+    meetingsList:Meeting[];
+    reminderList:Reminder[];
+
+    constructor(private meetingService:MeetingService, private reminderService:ReminderService, private notificationService:NotificationService){}
+    
+    ngOnInit(){
+        this.meetingService.getUpcomingMeetingsCount(this.empId).subscribe((data:number)=>this.upcMeetingsCount=data);
+        this.notificationService.getNotificationsCount(this.empId).subscribe((data:number)=>this.upcNotificationCount=data);
+        this.reminderService.getUpcomingReminderCount(this.empId).subscribe((data:number)=>this.upcReminderCount=data);
+        this.meetingService.getMeetings(this.empId).subscribe((data:Meeting[])=>this.meetingsList=data);
+        this.reminderService.getUpcomingReminders(this.empId).subscribe((data:Reminder[])=>this.reminderList=data);
+        
+    }
 
 }

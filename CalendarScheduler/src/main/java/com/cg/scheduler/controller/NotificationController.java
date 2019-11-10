@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ import com.cg.scheduler.service.NotificationService;
 
 @RestController
 @RequestMapping("notification")
+@CrossOrigin(origins = "http://localhost:4200")
 public class NotificationController {
 
 	@Autowired
@@ -66,6 +68,7 @@ public class NotificationController {
 		}
 	}
 	
+	@GetMapping("getCount")
 	public ResponseEntity<Integer> viewCount(@RequestParam("empId")Long empId){
 		try {
 			return new ResponseEntity<Integer>(notificationService.notificationCount(empId), HttpStatus.OK);
