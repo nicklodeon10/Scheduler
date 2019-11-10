@@ -29,5 +29,7 @@ public interface NotificationService {
 	public List<Notification> viewUnseen(Long empId) throws NotificationException;
 	
 	public boolean setAsSeen(Long notId) throws NotificationException;
+	
+	public int notificationCount(Long empId)throws NotificationException;
 
 }

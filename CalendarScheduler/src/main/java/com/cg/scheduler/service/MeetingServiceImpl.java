@@ -322,4 +322,14 @@ public class MeetingServiceImpl implements MeetingService {
 		return pastList;
 	}
 
+	@Override
+	public int upcomingMeetingsCount(Long empId) throws MeetingException {
+		List<Meeting> meetingList=viewUpcoming(empId);
+		for(Meeting meeting: meetingList) {
+			if(!meeting.isActive())
+				meetingList.remove(meeting);
+		}
+		return meetingList.size();
+	}
+
 }

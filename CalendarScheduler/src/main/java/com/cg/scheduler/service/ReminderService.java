@@ -25,5 +25,7 @@ public interface ReminderService {
 	public List<Reminder> searchByEmpId(Long empId) throws ReminderException;
 
 	public List<Reminder> viewUpcoming(Long empId) throws ReminderException;
+	
+	public int upcomingReminderCount(Long empId)throws ReminderException;
 
 }

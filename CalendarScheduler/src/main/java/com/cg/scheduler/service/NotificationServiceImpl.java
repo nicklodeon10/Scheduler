@@ -111,4 +111,14 @@ public class NotificationServiceImpl implements NotificationService {
 		return true;
 	}
 
+	@Override
+	public int notificationCount(Long empId) throws NotificationException {
+		List<Notification> notList=searchByEmpId(empId);
+		for(Notification notification: notList) {
+			if(notification.isSeen())
+				notList.remove(notification);
+		}
+		return notList.size();
+	}
+
 }

@@ -33,5 +33,7 @@ public interface MeetingService {
 	public List<Meeting> viewUpcoming(Long empId) throws MeetingException;
 	
 	public List<Meeting> viewPastMeetings(Long empId) throws MeetingException;
+	
+	public int upcomingMeetingsCount(Long empId)throws MeetingException;
 
 }

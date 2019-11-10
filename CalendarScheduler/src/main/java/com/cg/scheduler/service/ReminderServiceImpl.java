@@ -94,4 +94,14 @@ public class ReminderServiceImpl implements ReminderService {
 		return reminderList;
 	}
 
+	@Override
+	public int upcomingReminderCount(Long empId) throws ReminderException {
+		List<Reminder> reminderList=viewUpcoming(empId);
+		for(Reminder reminder: reminderList) {
+			if(!reminder.isActive())
+				reminderList.remove(reminder);
+		}
+		return reminderList.size();
+	}
+
 }
