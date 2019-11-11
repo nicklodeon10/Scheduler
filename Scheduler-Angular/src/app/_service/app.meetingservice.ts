@@ -17,4 +17,12 @@ export class MeetingService{
         return this.httpClient.get('http://localhost:9088/meeting/upcoming/view?empId='+empId);
     }
 
+    getNextMeeting(empId:number){
+        return this.httpClient.get('http://localhost:9088/meeting/getNext?empId='+empId);
+    }
+
+    getPastMeetings(empId:number){
+        return this.httpClient.get('http://localhost:9088/meeting/past/view?empId='+empId);
+    }
+
 }

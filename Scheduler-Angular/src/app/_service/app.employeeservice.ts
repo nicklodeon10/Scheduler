@@ -9,4 +9,8 @@ export class EmployeeService{
 
     constructor(private httpClient:HttpClient){}
 
+    viewAllEmployees(){
+        
+    }
+
 }

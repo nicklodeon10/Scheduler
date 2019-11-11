@@ -1,0 +1,49 @@
+<div id="wrapper">
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid"  style="margin-bottom: 50px;">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb" style="margin-top: 60px;">
+            <li class="breadcrumb-item">
+                <a href="#">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Past Meetings</li>
+        </ol>
+
+        <h4>Past Meetings</h4>
+
+        <div class="card" style="margin-top: 50px;">
+            <table style="border: 2px; border-color: black;">
+                <tr>
+                    <th>Meeting Id</th>
+                    <th>Meeting Title</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Organiser</th>
+                    <th>Participant Id's</th>
+                    <th>Participant Status</th>
+                    <th>Location</th>
+                </tr>
+                    <tr *ngFor="let meeting of pastMeetings">
+                        <td>{{meeting.meetingId}}</td>
+                        <td>{{meeting.meetingTitle}}</td>
+                        <td>{{meeting.startTime}}</td>
+                        <td>{{meeting.endTime}}</td>
+                        <td>{{meeting.organiser.empName}}</td>
+                        <td>{{meeting.participants}}</td>
+                        <td>{{meeting.participantStatus}}</td>
+                        <td>{{meeting.location}}</td>
+                    </tr>
+            </table>
+        </div>
+
+        </div>
+        <!-- /.container-fluid -->
+  
+      </div>
+      <!-- /.content-wrapper -->
+  
+    </div>
+    <!-- /#wrapper -->

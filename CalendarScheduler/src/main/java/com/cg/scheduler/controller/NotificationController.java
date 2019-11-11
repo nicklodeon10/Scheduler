@@ -34,8 +34,15 @@ public class NotificationController {
 
 	@GetMapping("viewById")
 	public ResponseEntity<List<Notification>> employeeNotifications(@RequestParam("empId") Long empId){
+		List<Notification> notList;
 		try {
-			return new ResponseEntity<List<Notification>>(notificationService.searchByEmpId(empId), HttpStatus.OK);
+			notList=notificationService.searchByEmpId(empId);
+			for(Notification not: notList) {
+				not.getToEmp().setReminders(null);
+				not.getToEmp().setNotifications(null);
+				not.getToEmp().setMeetings(null);
+			}
+			return new ResponseEntity<List<Notification>>(notList, HttpStatus.OK);
 		} catch (NotificationException e) {
 			return new ResponseEntity("No Notifications Found.", HttpStatus.BAD_REQUEST);
 		}
@@ -73,7 +80,7 @@ public class NotificationController {
 		try {
 			return new ResponseEntity<Integer>(notificationService.notificationCount(empId), HttpStatus.OK);
 		} catch (NotificationException e) {
-			return new ResponseEntity<Integer>(0, HttpStatus.OK);
+			return new ResponseEntity<Integer>(-1, HttpStatus.OK);
 		}
 	}
 }

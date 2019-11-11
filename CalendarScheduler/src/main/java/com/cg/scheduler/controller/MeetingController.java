@@ -42,6 +42,12 @@ public class MeetingController {
 	public ResponseEntity<Meeting> scheduleMeeting(@RequestBody Meeting meeting,
 			@RequestParam("organiserId") Long organiserId) {
 		Meeting newMeeting = null;
+		String[] idTokens = meeting.getParticipants().split(" ");
+		String participantStatus="";
+		for(int i=0; i<idTokens.length; i++) {
+			participantStatus+="nores ";
+		}
+		meeting.setParticipantStatus(participantStatus);
 		try {
 			meeting.setOrganiser(employeeService.searchById(organiserId));
 			newMeeting = meetingService.addMeeting(meeting);
@@ -164,7 +170,21 @@ public class MeetingController {
 		try {
 			return new ResponseEntity<Integer>(meetingService.upcomingMeetingsCount(empId), HttpStatus.OK);
 		} catch (MeetingException e) {
-			return new ResponseEntity<Integer>(0, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Integer>(-1, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("getNext")
+	public ResponseEntity<Meeting> getNext(@RequestParam("empId")Long empId){
+		Meeting meeting;
+		try {
+			meeting=meetingService.getNext(empId);
+			meeting.getOrganiser().setMeetings(null);
+			meeting.getOrganiser().setNotifications(null);
+			meeting.getOrganiser().setReminders(null);
+			return new ResponseEntity<Meeting>(meeting, HttpStatus.OK);
+		} catch (MeetingException e) {
+			return new ResponseEntity("Could not retrieve any meetings. Please try again.", HttpStatus.BAD_REQUEST);
 		}
 	}
 }

@@ -13,4 +13,8 @@ export class NotificationService{
         return this.httpClient.get('http://localhost:9088/notification/getCount?empId='+empId);
     }
 
+    getNotifications(empId:number){
+        return this.httpClient.get('http://localhost:9088/notification/viewById?empId='+empId);
+    }
+
 }

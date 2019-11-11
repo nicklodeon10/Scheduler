@@ -102,7 +102,7 @@ public class ReminderController {
 		try {
 			return new ResponseEntity<Integer>(reminderService.upcomingReminderCount(empId),HttpStatus.OK);
 		} catch (ReminderException e) {
-			return new ResponseEntity<Integer>(0, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Integer>(-1, HttpStatus.BAD_REQUEST);
 		}
 	}
 	

@@ -4,6 +4,7 @@ import { MeetingService } from './_service/app.meetingservice';
 import { ReminderService } from './_service/app.reminderservice';
 import { NotificationService } from './_service/app.notificationservice';
 import { Reminder } from './_model/app.reminder';
+import { Notification } from './_model/app.notification';
 
 @Component({
     selector: 'dashboard',
@@ -19,6 +20,7 @@ export class DashboardComponent implements OnInit{
     nextMeeting:Meeting;
     meetingsList:Meeting[];
     reminderList:Reminder[];
+    notificationsList:Notification[];
 
     constructor(private meetingService:MeetingService, private reminderService:ReminderService, private notificationService:NotificationService){}
     
@@ -27,8 +29,9 @@ export class DashboardComponent implements OnInit{
         this.notificationService.getNotificationsCount(this.empId).subscribe((data:number)=>this.upcNotificationCount=data);
         this.reminderService.getUpcomingReminderCount(this.empId).subscribe((data:number)=>this.upcReminderCount=data);
         this.meetingService.getMeetings(this.empId).subscribe((data:Meeting[])=>this.meetingsList=data);
+        this.meetingService.getNextMeeting(this.empId).subscribe((data:Meeting)=>this.nextMeeting=data);
         this.reminderService.getUpcomingReminders(this.empId).subscribe((data:Reminder[])=>this.reminderList=data);
-        
+        this.notificationService.getNotifications(this.empId).subscribe((data:Notification[])=>this.notificationsList=data);
     }
 
 }

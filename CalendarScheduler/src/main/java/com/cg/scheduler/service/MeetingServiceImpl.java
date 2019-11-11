@@ -303,7 +303,7 @@ public class MeetingServiceImpl implements MeetingService {
 		List<Meeting> pastList=new ArrayList<>();
 		for(Meeting meeting: meetingList) {
 			if(meeting.getOrganiser().getEmpId()==empId) {
-				if(meeting.getStartTime().isAfter(LocalDateTime.now())) {
+				if(meeting.getStartTime().isBefore(LocalDateTime.now())) {
 					pastList.add(meeting);
 				}
 			}
@@ -330,6 +330,18 @@ public class MeetingServiceImpl implements MeetingService {
 				meetingList.remove(meeting);
 		}
 		return meetingList.size();
+	}
+
+	@Override
+	public Meeting getNext(Long empId) throws MeetingException {
+		List<Meeting> meetingList=viewUpcoming(empId);
+		Meeting nextMeeting=meetingList.get(0);
+		for(Meeting meeting:meetingList) {
+			if(meeting.getStartTime().isBefore(nextMeeting.getStartTime())) {
+				nextMeeting=meeting;
+			}
+		}
+		return nextMeeting;
 	}
 
 }

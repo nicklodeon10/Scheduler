@@ -9,12 +9,16 @@ import {ErrorPageComponent} from './app.errorpagecomponent';
 import { LoginComponent } from './app.logincomponent';
 import { RegisterComponent } from './app.registercomponent';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PastMeetingComponent } from './app.pastmeetingcomponent';
+import { AddMeetingComponent } from './app.addmeetingcomponent';
 
 
 @NgModule({
     imports: [
         BrowserModule,
-        HttpClientModule      
+        HttpClientModule,
+        NgxPaginationModule      
     ],
     declarations: [
         AppComponent,
@@ -24,7 +28,9 @@ import { HttpClientModule } from '@angular/common/http';
         DashboardComponent,
         ErrorPageComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        PastMeetingComponent,
+        AddMeetingComponent
 		],
     providers: [ ],
     bootstrap: [AppComponent]
