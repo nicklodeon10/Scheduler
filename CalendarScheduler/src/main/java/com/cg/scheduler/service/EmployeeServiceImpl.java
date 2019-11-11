@@ -96,4 +96,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return true;
 	}
 
+	@Override
+	public Employee searchByUsername(String username) throws EmployeeException {
+		return employeeRepository.findByUserName(username).get();
+	}
+
 }

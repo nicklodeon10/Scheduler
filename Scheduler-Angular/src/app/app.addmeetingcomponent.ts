@@ -10,9 +10,11 @@ import { MeetingService } from './_service/app.meetingservice';
 })
 export class AddMeetingComponent{
 
-    constructor(private empService:EmployeeService, private meetingService:MeetingService){}
+    constructor(private empService:EmployeeService, private meetingService:MeetingService){
+        this.empId=+sessionStorage.getItem('userId');
+    }
 
-    empId:number=3;
+    empId:number;
 
     participantId:String="";
 

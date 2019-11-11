@@ -78,7 +78,24 @@ public class EmployeeController {
 			throw new Exception("INVALID_CREDENTIALS", e);
 		}
 	}
-
+	
+	//Returns the role of a user
+	@GetMapping("/getRole")
+	public ResponseEntity<Employee> getRole(@RequestParam("username") String username){
+		try {
+			System.out.println("Finding User Role");
+			Employee user=employeeService.searchByUsername(username);
+			user.setEmpPassword("******");
+			System.out.println("Returning User for role");
+			user.setMeetings(null);
+			user.setNotifications(null);
+			user.setReminders(null);
+			return new ResponseEntity<Employee>(user, HttpStatus.OK);
+		} catch (EmployeeException e) {
+			System.out.println("Error in fetching");
+			return new ResponseEntity("Error", HttpStatus.BAD_REQUEST);
+		}
+	}
 	@PostMapping("add")
 	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
 		try {

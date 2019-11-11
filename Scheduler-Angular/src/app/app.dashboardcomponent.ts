@@ -12,7 +12,7 @@ import { Notification } from './_model/app.notification';
 })
 export class DashboardComponent implements OnInit{
 
-    empId=3;
+    empId:number;
 
     upcMeetingsCount:number;
     upcReminderCount:number;
@@ -23,7 +23,9 @@ export class DashboardComponent implements OnInit{
     notificationsList:Notification[];
     notificationType:boolean[];
 
-    constructor(private meetingService:MeetingService, private reminderService:ReminderService, private notificationService:NotificationService){}
+    constructor(private meetingService:MeetingService, private reminderService:ReminderService, private notificationService:NotificationService){
+        this.empId=+sessionStorage.getItem('userId');
+    }
     
     ngOnInit(){
         this.meetingService.getUpcomingMeetingsCount(this.empId).subscribe((data:number)=>this.upcMeetingsCount=data);

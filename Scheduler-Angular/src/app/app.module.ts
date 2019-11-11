@@ -17,6 +17,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ViewReminderComponent } from './app.viewremindercomponent';
 import { ViewNotificationComponent } from './app.viewnotificationcomponent';
 import { HttpErrorInterceptor } from './http-error.interceptor';
+import { LogoutComponent } from './app.logoutcomponent';
 
 const appRoutes:Routes=[
     {path:'',redirectTo: 'home', pathMatch: 'full'},
@@ -27,7 +28,8 @@ const appRoutes:Routes=[
     {path:'pastmeeting', component: PastMeetingComponent},
     {path:'addmeeting', component: AddMeetingComponent},
     {path:'viewreminders', component: ViewReminderComponent},
-    {path:'viewnotifications', component: ViewNotificationComponent}
+    {path:'viewnotifications', component: ViewNotificationComponent},
+    {path: 'logout', component: LogoutComponent},
 ];
 
 @NgModule({
@@ -50,7 +52,8 @@ const appRoutes:Routes=[
         PastMeetingComponent,
         AddMeetingComponent,
         ViewReminderComponent,
-        ViewNotificationComponent
+        ViewNotificationComponent,
+        LogoutComponent
 		],
     providers: [{
         provide: HTTP_INTERCEPTORS,

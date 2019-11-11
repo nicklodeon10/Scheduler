@@ -27,5 +27,7 @@ public interface EmployeeService {
 	public Employee update(Employee employee) throws EmployeeException;
 
 	public boolean delete(Long empId) throws EmployeeException;
+	
+	public Employee searchByUsername(String username) throws EmployeeException;
 
 }

@@ -37,9 +37,6 @@ intercept(request:HttpRequest<any>, next:HttpHandler):Observable<HttpEvent<any>>
                     errorMessage='Could not connect to Web Service';
                     errorFlag=false;
                 }
-                if(error.status==401){
-                    alert("Invalid Login Credentials.")
-                }
             }
             if(errorFlag){
                 window.alert(errorMessage);
