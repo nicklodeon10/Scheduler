@@ -2,7 +2,7 @@ import { Employee } from "./app.employee";
 
 export class Meeting{
     meetingId:number;
-    meetingTitle:String;
+    meetingTitle:string;
     startTime:any;
     endTime:any;
     organiser:Employee;

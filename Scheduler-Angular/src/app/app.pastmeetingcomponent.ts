@@ -8,11 +8,13 @@ import { Meeting } from './_model/app.meeting';
 })
 export class PastMeetingComponent implements OnInit{
 
-    empId:number=3;
+    empId:number;
 
     pastMeetings:Meeting[];
 
-    constructor(private meetingService:MeetingService){}
+    constructor(private meetingService:MeetingService){
+        this.empId=+sessionStorage.getItem('userId');
+    }
 
     ngOnInit(){
         this.meetingService.getPastMeetings(this.empId).subscribe((data:Meeting[])=>this.pastMeetings=data);

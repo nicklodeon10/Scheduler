@@ -5,6 +5,7 @@ import { ReminderService } from './_service/app.reminderservice';
 import { NotificationService } from './_service/app.notificationservice';
 import { Reminder } from './_model/app.reminder';
 import { Notification } from './_model/app.notification';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'dashboard',
@@ -23,7 +24,7 @@ export class DashboardComponent implements OnInit{
     notificationsList:Notification[];
     notificationType:boolean[];
 
-    constructor(private meetingService:MeetingService, private reminderService:ReminderService, private notificationService:NotificationService){
+    constructor(private router: Router, private meetingService:MeetingService, private reminderService:ReminderService, private notificationService:NotificationService){
         this.empId=+sessionStorage.getItem('userId');
     }
     
@@ -40,16 +41,22 @@ export class DashboardComponent implements OnInit{
     approveMeeting(meetingId:number, notId:number){
         this.meetingService.approveMeeting(meetingId, this.empId);
         this.notificationService.setSeen(notId);
+        alert("Meeting Request Approved.");
+        location.reload();
     }
 
     maybeMeeting(meetingId:number, notId:number){
         this.meetingService.maybeMeeting(meetingId, this.empId);
         this.notificationService.setSeen(notId);
+        alert("Meeting Request Maybe.");
+        location.reload();
     }
 
     cancelMeeting(meetingId:number, notId:number){
         this.meetingService.cancelMeeting(meetingId, this.empId);
         this.notificationService.setSeen(notId);
+        alert("Meeting Request Cancelled.");
+        location.reload();
     }
 
 }

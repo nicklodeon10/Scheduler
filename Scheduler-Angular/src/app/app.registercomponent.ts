@@ -19,4 +19,33 @@ export class RegisterComponent{
         this.router.navigate(['login']);
     }
 
+    public barLabel: string = "Password strength:";
+    public myColors = ['#DD2C00', '#FF6D00', '#FFD600', '#AEEA00', '#00C853'];
+
+    buttonDisable:boolean=true;
+
+    nameValid:boolean=true;
+    validateName(){
+        this.nameValid=/^[a-zA-Z ]+$/.test(this.user.empName);
+        console.log(this.nameValid);
+    }
+
+    phoneValid:boolean=true;
+    validatePhone(){
+        if(String(this.user.empPhone).length==10){
+            this.phoneValid=true;
+        }else{
+            this.phoneValid=false;
+        }
+    }
+
+    emailValid:boolean=true;
+    validateEmail(){
+        this.emailValid=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.user.empEmail);
+    }
+
+    enableButton(){
+        this.buttonDisable=!(this.nameValid&&this.phoneValid&&this.emailValid);
+    }
+
 }

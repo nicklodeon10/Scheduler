@@ -13,7 +13,7 @@
         </ol>
 
         <div class="row" style="padding: 15px;">
-          <h3>Welcome to My Scheduler, User</h3>
+          <h3>Welcome to My Scheduler, User {{empId}}</h3>
         </div>
 
         <!-- Icon Cards-->
@@ -157,7 +157,7 @@
                       <div class="card-text">
                         <!-- Meeting Request Card -->
                         <div *ngFor="let notification of notificationsList | paginate: { id: 'pag3', itemsPerPage: 2, currentPage: p1}">
-                          <div class="card" style="width: 100%;">
+                          <div *ngIf="!notification.seen" class="card" style="width: 100%;">
                             <div class="card-body">
                               <h5 class="card-title">{{notification.notMessage}}</h5>
                               <hr>

@@ -16,22 +16,30 @@ export class LoginComponent{
 
     constructor(private router: Router, private loginservice: AuthenticationService) { }
 
+  temp:number=0;
+
 //Checks user authentication
   checkLogin() {
     if (this.loginservice.authenticate(this.username, this.password)) {
       this.loginservice.getRole(this.username).subscribe((data:Employee)=>{
         sessionStorage.setItem('userId',String(data.empId)); 
       });
-      this.loginservice.getRole(this.username).subscribe((data:Employee)=>{
-        sessionStorage.setItem('userId',String(data.empId)); 
-      });
-      alert("Successfully Logged In.");
-      this.invalidLogin = false;
-      console.log(sessionStorage.getItem('userId'));
-      //this.router.navigate(['dashboard']);
+      this.redirect();
     } else{
       alert("Invalid Login Credentials.");
       this.invalidLogin = true;
+    }
+  }
+
+  redirect(){
+    this.temp++;
+    if(this.temp==2){
+      alert("Successfully Logged In.");
+      this.invalidLogin = false;
+      this.temp=0;
+      this.router.navigate(['dashboard']).then(()=>{
+        window.location.reload();
+      });;
     }
   }
 

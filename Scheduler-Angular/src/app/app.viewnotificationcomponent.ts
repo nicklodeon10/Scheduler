@@ -8,10 +8,12 @@ import { Notification } from './_model/app.notification';
 })
 export class ViewNotificationComponent implements OnInit{
 
-    constructor(private notService:NotificationService){}
-
-    empId:number=3;
+    empId:number;
     notList:Notification[];
+
+    constructor(private notService:NotificationService){
+        this.empId=+sessionStorage.getItem('userId');
+    }
 
     ngOnInit(){
         this.notService.getAllNotifications(this.empId).subscribe((data:Notification[])=>this.notList=data);

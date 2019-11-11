@@ -18,6 +18,7 @@ import { ViewReminderComponent } from './app.viewremindercomponent';
 import { ViewNotificationComponent } from './app.viewnotificationcomponent';
 import { HttpErrorInterceptor } from './http-error.interceptor';
 import { LogoutComponent } from './app.logoutcomponent';
+import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
 
 const appRoutes:Routes=[
     {path:'',redirectTo: 'home', pathMatch: 'full'},
@@ -38,7 +39,8 @@ const appRoutes:Routes=[
         HttpClientModule,
         NgxPaginationModule,
         FormsModule,
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes),
+        PasswordStrengthBarModule
     ],
     declarations: [
         AppComponent,

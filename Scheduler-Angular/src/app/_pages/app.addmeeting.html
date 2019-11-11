@@ -26,8 +26,9 @@
                           <div class="form-row">
                             <div class="col-md-12">
                               <div class="form-label-group">
-                                <input [(ngModel)]="meeting.meetingTitle" [ngModelOptions]="{standalone: true}" type="text" id="meetingTitle" class="form-control" placeholder="Meeting Title" required="required" autofocus="autofocus">
+                                <input (blur)="validateTitle()" [(ngModel)]="meeting.meetingTitle" [ngModelOptions]="{standalone: true}" type="text" id="meetingTitle" class="form-control" placeholder="Meeting Title" required="required" autofocus="autofocus">
                                 <label for="meetingTitle">Title</label>
+                                <small *ngIf="!validNameFlag" style="color: red;">Invalid Title Entered</small>
                               </div>
                             </div>
                         </div>
@@ -46,8 +47,9 @@
                           <div class="form-row">
                               <div class="col-md-12">
                                   <div class="form-label-group">
-                                      <input [(ngModel)]="meeting.startTime" [ngModelOptions]="{standalone: true}" type="datetime-local" id="startTime" class="form-control" placeholder="Start Time" required="required">
+                                      <input (blur)="validateStartTime()" [(ngModel)]="meeting.startTime" [ngModelOptions]="{standalone: true}" type="datetime-local" id="startTime" class="form-control" placeholder="Start Time" required="required">
                                       <label for="startTime">Start Time</label>
+                                      <small *ngIf="!validStartTimeFlag" style="color: red;">Invalid Time Entered</small>
                                   </div>
                               </div>
                           </div>
@@ -56,8 +58,9 @@
                             <div class="form-row">
                                 <div class="col-md-12">
                                     <div class="form-label-group">
-                                        <input [(ngModel)]="meeting.endTime" [ngModelOptions]="{standalone: true}" type="datetime-local" id="endTime" class="form-control" placeholder="End Time" required="required">
+                                        <input (blur)="validateEndTime()" [(ngModel)]="meeting.endTime" [ngModelOptions]="{standalone: true}" type="datetime-local" id="endTime" class="form-control" placeholder="End Time" required="required">
                                         <label for="endTime">End Time</label>
+                                        <small *ngIf="!validEndTimeFlag" style="color: red;">Invalid Time Entered</small>
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +131,7 @@
                           </table>
                         </div>
                       </div>
-                      <button class="btn btn-primary btn-block" (click)="addMeeting()">Schedule</button>
+                      <button [disabled]="buttonDisable" class="btn btn-primary btn-block" (click)="addMeeting()">Schedule</button>
                       </form>
                       <div class="text-center">
                         <br>

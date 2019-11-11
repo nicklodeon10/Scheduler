@@ -4,11 +4,11 @@ import { Meeting } from "./app.meeting";
 
 export class Employee{
     empId:number;
-    empName:String;
-    userName:String;
-    empPassword:String;
-    empPhone:String;
-    empEmail:String;
+    empName:string;
+    userName:string;
+    empPassword:string;
+    empPhone:string;
+    empEmail:string;
     notifications:Notification[];
     reminders:Reminder[];
     meetings:Meeting[];

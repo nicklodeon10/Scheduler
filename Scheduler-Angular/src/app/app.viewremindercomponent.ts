@@ -8,11 +8,12 @@ import { Reminder } from './_model/app.reminder';
 })
 export class ViewReminderComponent implements OnInit{
 
-    constructor(private reminderService:ReminderService){}
-
-    empId:number=3;
-
+    empId:number;
     reminderList:Reminder[];
+
+    constructor(private reminderService:ReminderService){
+        this.empId=+sessionStorage.getItem('userId');
+    }
 
     ngOnInit(){
         this.reminderService.getAllReminders(this.empId).subscribe((data:Reminder[])=>this.reminderList=data);
