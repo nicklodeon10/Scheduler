@@ -1,0 +1,39 @@
+<div id="wrapper">
+
+        <div id="content-wrapper">
+    
+          <div class="container-fluid"  style="margin-bottom: 50px;">
+    
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb" style="margin-top: 60px;">
+                <li class="breadcrumb-item">
+                    <a href="dashboard">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">All Reminders</li>
+            </ol>
+    
+            <h4>All Reminders</h4>
+    
+            <div class="card" style="margin-top: 50px;">
+                <table style="border: 2px; border-color: black;">
+                    <tr>
+                        <th>Reminder Id</th>
+                        <th>Reminder Message</th>
+                        <th>Due Time</th>
+                    </tr>
+                        <tr *ngFor="let reminder of reminderList">
+                            <td>{{reminder.remId}}</td>
+                            <td>{{reminder.remMessage}}</td>
+                            <td>{{reminder.dueTime}}</td>
+                        </tr>
+                </table>
+            </div>
+    
+            </div>
+            <!-- /.container-fluid -->
+      
+          </div>
+          <!-- /.content-wrapper -->
+      
+        </div>
+        <!-- /#wrapper -->

@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,14 +58,21 @@ public class NotificationController {
 	
 	@GetMapping("viewUnseen")
 	public ResponseEntity<List<Notification>> viewUnseen(@RequestParam("empId") Long empId){
+		List<Notification> notList;
 		try {
-			return new ResponseEntity<List<Notification>>(notificationService.viewUnseen(empId), HttpStatus.OK);
+			notList=notificationService.viewUnseen(empId);
+			for(Notification not: notList) {
+				not.getToEmp().setReminders(null);
+				not.getToEmp().setNotifications(null);
+				not.getToEmp().setMeetings(null);
+			}
+			return new ResponseEntity<List<Notification>>(notList, HttpStatus.OK);
 		} catch (NotificationException e) {
 			return new ResponseEntity("No Notifications Found.", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
-	@PostMapping("setSeen")
+	@GetMapping("setSeen")
 	public ResponseEntity<Boolean> setAsSeen(@RequestParam("notId")Long notId) {
 		try {
 			return new ResponseEntity<Boolean>(notificationService.setAsSeen(notId), HttpStatus.OK);

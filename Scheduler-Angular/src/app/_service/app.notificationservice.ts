@@ -14,6 +14,14 @@ export class NotificationService{
     }
 
     getNotifications(empId:number){
+        return this.httpClient.get('http://localhost:9088/notification/viewUnseen?empId='+empId);
+    }
+
+    setSeen(notId:number){
+        return this.httpClient.get('http://localhost:9088/notification/setSeen?notId='+notId);
+    }
+
+    getAllNotifications(empId:number){
         return this.httpClient.get('http://localhost:9088/notification/viewById?empId='+empId);
     }
 

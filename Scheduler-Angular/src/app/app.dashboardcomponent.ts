@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit{
     meetingsList:Meeting[];
     reminderList:Reminder[];
     notificationsList:Notification[];
+    notificationType:boolean[];
 
     constructor(private meetingService:MeetingService, private reminderService:ReminderService, private notificationService:NotificationService){}
     
@@ -32,6 +33,21 @@ export class DashboardComponent implements OnInit{
         this.meetingService.getNextMeeting(this.empId).subscribe((data:Meeting)=>this.nextMeeting=data);
         this.reminderService.getUpcomingReminders(this.empId).subscribe((data:Reminder[])=>this.reminderList=data);
         this.notificationService.getNotifications(this.empId).subscribe((data:Notification[])=>this.notificationsList=data);
+    }
+
+    approveMeeting(meetingId:number, notId:number){
+        this.meetingService.approveMeeting(meetingId, this.empId);
+        this.notificationService.setSeen(notId);
+    }
+
+    maybeMeeting(meetingId:number, notId:number){
+        this.meetingService.maybeMeeting(meetingId, this.empId);
+        this.notificationService.setSeen(notId);
+    }
+
+    cancelMeeting(meetingId:number, notId:number){
+        this.meetingService.cancelMeeting(meetingId, this.empId);
+        this.notificationService.setSeen(notId);
     }
 
 }

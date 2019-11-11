@@ -7,7 +7,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb" style="margin-top: 60px;">
           <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
+            <a href="dashboard">Dashboard</a>
           </li>
           <li class="breadcrumb-item active">Overview</li>
         </ol>
@@ -116,8 +116,8 @@
                 </div>
                 <pagination-controls id="pag1" class="pagination" (pageChange)="p = $event"></pagination-controls>
                 <hr>
-                <a href="#" class="btn btn-primary">View Past Meetings</a>
-                <a href="#" class="btn btn-primary">Schedule a New Meeting</a>
+                <a href="pastmeeting" class="btn btn-primary">View Past Meetings</a>
+                <a href="addmeeting" class="btn btn-primary">Schedule a New Meeting</a>
               </div>
             </div>
           </div>
@@ -135,7 +135,7 @@
                               <h5 class="card-title">{{reminder.dueTime}}</h5>
                               <p class="card-text">
                                 {{reminder.remMessage}}
-                              </p>         
+                              </p>   
                             </div>
                           </div>
                           <hr>
@@ -144,8 +144,7 @@
                         </div>
                         <pagination-controls id="pag2" class="pagination" (pageChange)="p = $event"></pagination-controls>
                     <hr>
-                    <a href="#" class="btn btn-primary">View All Reminders</a>
-                    <a href="#" class="btn btn-primary">Add a Custom Reminder</a>
+                    <a href="viewreminders" class="btn btn-primary">View All Reminders</a>
                   </div>
                 </div>
             </div>
@@ -165,7 +164,13 @@
                               <p class="card-text">
                                 Meeting Id:{{notification.meetingId}}<br>
                                 Time: {{notification.notTime}}
-                              </p>         
+                              </p><br>
+                              <div *ngIf="notification.notMessage.substring(0,14).localeCompare('MEETING UPDATE')">
+                                  Actions:
+                                  <button class="btn btn-info" (click)="approveMeeting(notification.meetingId, notification.notId)">Approve</button>
+                                  <button class="btn btn-warning" (click)="maybeMeeting(notification.meetingId, notification.notId)">Maybe</button>
+                                  <button class="btn btn-danger" (click)="cancelMeeting(notification.meetingId, notification.notId)">Cancel</button>
+                              </div>            
                             </div>
                           </div>
                           <hr>
@@ -174,7 +179,7 @@
                         </div>
                         <pagination-controls id="pag3" class="pagination" (pageChange)="p1 = $event"></pagination-controls>
                       <hr>
-                      <a href="#" class="btn btn-primary">View All Requests</a>
+                      <a href="viewnotifications" class="btn btn-primary">View All Notifications</a>
                     </div>
                   </div>
             </div>

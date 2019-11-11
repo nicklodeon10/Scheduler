@@ -158,7 +158,7 @@ public class MeetingServiceImpl implements MeetingService {
 		// Notify Organiser
 		String message;
 		try {
-			message = meeting.getMeetingTitle() + ", Organiser: " + meeting.getOrganiser().getEmpName() + ", Time: "
+			message ="MEETING UPDATE:" + meeting.getMeetingTitle() + ", Organiser: " + meeting.getOrganiser().getEmpName() + ", Time: "
 					+ meeting.getStartTime() + ", Approved By: " + employeeService.searchById(empId).getEmpName();
 		} catch (EmployeeException e) {
 			throw new MeetingException("Could not find organiser.");
@@ -208,7 +208,7 @@ public class MeetingServiceImpl implements MeetingService {
 		// Notify Organiser
 		String message;
 		try {
-			message = meeting.getMeetingTitle() + ", Organiser: " + meeting.getOrganiser().getEmpName() + ", Time: "
+			message ="MEETING UPDATE:" + meeting.getMeetingTitle() + ", Organiser: " + meeting.getOrganiser().getEmpName() + ", Time: "
 					+ meeting.getStartTime() + ", Maybe By: " + employeeService.searchById(empId).getEmpName();
 		} catch (EmployeeException e) {
 			throw new MeetingException("Could not find organiser.");
@@ -248,7 +248,7 @@ public class MeetingServiceImpl implements MeetingService {
 		// Notify Organiser
 		String message;
 		try {
-			message = meeting.getMeetingTitle() + ", Organiser: " + meeting.getOrganiser().getEmpName() + ", Time: "
+			message ="MEETING UPDATE:" + meeting.getMeetingTitle() + ", Organiser: " + meeting.getOrganiser().getEmpName() + ", Time: "
 					+ meeting.getStartTime() + ", Cancelled By: " + employeeService.searchById(empId).getEmpName();
 		} catch (EmployeeException e) {
 			throw new MeetingException("Could not find organiser.");

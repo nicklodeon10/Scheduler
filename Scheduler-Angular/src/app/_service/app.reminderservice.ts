@@ -16,4 +16,8 @@ export class ReminderService{
     getUpcomingReminders(empId:number){
         return this.httpClient.get('http://localhost:9088/reminder/upcoming/view?empId='+empId);
     }
+
+    getAllReminders(empId:number){
+        return this.httpClient.get('http://localhost:9088/reminder/view?empId='+empId);
+    }
 }

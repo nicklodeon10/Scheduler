@@ -1,0 +1,43 @@
+<div id="wrapper">
+
+        <div id="content-wrapper">
+    
+          <div class="container-fluid"  style="margin-bottom: 50px;">
+    
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb" style="margin-top: 60px;">
+                <li class="breadcrumb-item">
+                    <a href="dashboard">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">All Notifications</li>
+            </ol>
+    
+            <h4>All Notifications</h4>
+    
+            <div class="card" style="margin-top: 50px;">
+                <table style="border: 2px; border-color: black;">
+                    <tr>
+                        <th>Notification Id</th>
+                        <th>From</th>
+                        <th>Message</th>
+                        <th>Meeting Id</th>
+                        <th>Time</th>
+                    </tr>
+                        <tr *ngFor="let notification of notList">
+                            <td>{{notification.notId}}</td>
+                            <td>{{notification.fromEmpId}}</td>
+                            <td>{{notification.notMessage}}</td>
+                            <td>{{notification.meetingId}}</td>
+                            <td>{{notification.notTime}}</td>
+                        </tr>
+                </table>
+            </div>
+    
+            </div>
+            <!-- /.container-fluid -->
+      
+          </div>
+          <!-- /.content-wrapper -->
+      
+        </div>
+        <!-- /#wrapper -->

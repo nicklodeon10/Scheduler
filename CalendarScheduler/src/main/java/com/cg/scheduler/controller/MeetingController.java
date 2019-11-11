@@ -89,7 +89,7 @@ public class MeetingController {
 		return new ResponseEntity<String>("Meeting Cancelled.", HttpStatus.OK);
 	}
 
-	@PostMapping("respond/approve")
+	@GetMapping("respond/approve")
 	public ResponseEntity<Meeting> respondApproveMeeting(@RequestParam("empId") Long empId,
 			@RequestParam("meetingId") Long meetingId) {
 		Meeting meeting;
@@ -104,7 +104,7 @@ public class MeetingController {
 		return new ResponseEntity<Meeting>(meeting, HttpStatus.OK);
 	}
 	
-	@PostMapping("respond/maybe")
+	@GetMapping("respond/maybe")
 	public ResponseEntity<Meeting> respondMaybeMeeting(@RequestParam("empId") Long empId,
 			@RequestParam("meetingId") Long meetingId) {
 		Meeting meeting;
@@ -119,7 +119,7 @@ public class MeetingController {
 		return new ResponseEntity<Meeting>(meeting, HttpStatus.OK);
 	}
 	
-	@PostMapping("respond/cancel")
+	@GetMapping("respond/cancel")
 	public ResponseEntity<Meeting> respondCancelMeeting(@RequestParam("empId") Long empId,
 			@RequestParam("meetingId") Long meetingId) {
 		Meeting meeting;

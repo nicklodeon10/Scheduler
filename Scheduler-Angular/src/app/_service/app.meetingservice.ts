@@ -30,4 +30,16 @@ export class MeetingService{
         return this.httpClient.get('http://localhost:9088/meeting/past/view?empId='+empId);
     }
 
+    approveMeeting(meetingId:number, empId:number){
+        return this.httpClient.get('http://localhost:9088/meeting/respond/approve?empId='+empId+'&meetingId='+meetingId);
+    }
+
+    maybeMeeting(meetingId:number, empId:number){
+        return this.httpClient.get('http://localhost:9088/meeting/respond/maybe?empId='+empId+'&meetingId='+meetingId);
+    }
+
+    cancelMeeting(meetingId:number, empId:number){
+        return this.httpClient.get('http://localhost:9088/meeting/respond/cancel?empId='+empId+'&meetingId='+meetingId);
+    }
+
 }
