@@ -12,13 +12,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PastMeetingComponent } from './app.pastmeetingcomponent';
 import { AddMeetingComponent } from './app.addmeetingcomponent';
-
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
     imports: [
         BrowserModule,
         HttpClientModule,
-        NgxPaginationModule      
+        NgxPaginationModule,
+        FormsModule  
     ],
     declarations: [
         AppComponent,

@@ -26,7 +26,7 @@ import com.cg.scheduler.service.NotificationService;
 
 @RestController
 @RequestMapping("notification")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class NotificationController {
 
 	@Autowired

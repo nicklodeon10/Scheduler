@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import { Meeting } from '../_model/app.meeting';
 
 @Injectable({
     providedIn: 'root'
@@ -8,6 +9,10 @@ import {HttpClient} from '@angular/common/http';
 export class MeetingService{
 
     constructor(private httpClient:HttpClient){}
+
+    addMeeting(meeting:Meeting, empId:number){
+        return this.httpClient.post('http://localhost:9088/meeting/add?organiserId='+empId,meeting);
+    }
 
     getUpcomingMeetingsCount(empId:number){
         return this.httpClient.get('http://localhost:9088/meeting/getCount?empId='+empId);

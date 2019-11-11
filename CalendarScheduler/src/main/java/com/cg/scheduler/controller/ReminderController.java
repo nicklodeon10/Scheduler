@@ -30,7 +30,7 @@ import com.cg.scheduler.service.ReminderService;
 
 @RestController
 @RequestMapping("reminder")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class ReminderController {
 
 	@Autowired

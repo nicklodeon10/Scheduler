@@ -18,7 +18,7 @@ public interface EmployeeService {
 
 	public List<Employee> read() throws EmployeeException;
 
-	public Employee searchByName(String name) throws EmployeeException;
+	public List<Employee> searchByName(String name) throws EmployeeException;
 
 	public Employee searchByEmail(String email) throws EmployeeException;
 	

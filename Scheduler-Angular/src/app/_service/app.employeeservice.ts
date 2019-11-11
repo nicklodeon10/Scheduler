@@ -9,8 +9,12 @@ export class EmployeeService{
 
     constructor(private httpClient:HttpClient){}
 
-    viewAllEmployees(){
-        
+    searchByName(empName:String){
+        return this.httpClient.get('http://localhost:9088/employee/search/name?empName='+empName);
+    }
+
+    searchByEmail(empEmail:String){
+        return this.httpClient.get('http://localhost:9088/employee/search/email?empEmail='+empEmail);
     }
 
 }

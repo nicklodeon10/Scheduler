@@ -3,6 +3,8 @@
  */
 package com.cg.scheduler.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.scheduler.dto.Employee;
-import com.cg.scheduler.dto.Meeting;
-import com.cg.scheduler.dto.Notification;
-import com.cg.scheduler.dto.Reminder;
 import com.cg.scheduler.exception.EmployeeException;
 import com.cg.scheduler.service.EmployeeService;
 
@@ -28,7 +27,7 @@ import com.cg.scheduler.service.EmployeeService;
 
 @RestController
 @RequestMapping("employee")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class EmployeeController {
 	
 	@Autowired
@@ -45,17 +44,12 @@ public class EmployeeController {
 	
 	@GetMapping("search/email")
 	public ResponseEntity<Employee> searchEmployeeByEmail(@RequestParam("empEmail") String email){
+		Employee emp;
 		try {
-			Employee emp=employeeService.searchByEmail(email);
-			for(Reminder rem: emp.getReminders()) {
-				rem.setEmp(null);
-			}
-			for(Meeting meet: emp.getMeetings()) {
-				meet.setOrganiser(null);
-			}
-			for(Notification not: emp.getNotifications()) {
-				not.setToEmp(null);
-			}
+			emp=employeeService.searchByEmail(email);
+			emp.setMeetings(null);
+			emp.setNotifications(null);
+			emp.setReminders(null);
 			return new ResponseEntity<Employee>(emp, HttpStatus.OK);
 		} catch (EmployeeException e) {
 			return new ResponseEntity("No Employee(s) Found. Please try again with a different search parameter.", HttpStatus.BAD_REQUEST);
@@ -63,19 +57,16 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("search/name")
-	public ResponseEntity<Employee> searchEmployeeByName(@RequestParam("empName") String name){
+	public ResponseEntity<List<Employee>> searchEmployeeByName(@RequestParam("empName") String name){
+		List<Employee> empList;
 		try {
-			Employee emp=employeeService.searchByName(name);
-			for(Reminder rem: emp.getReminders()) {
-				rem.setEmp(null);
+			empList=employeeService.searchByName(name);
+			for(Employee emp: empList) {
+				emp.setMeetings(null);
+				emp.setNotifications(null);
+				emp.setReminders(null);
 			}
-			for(Meeting meet: emp.getMeetings()) {
-				meet.setOrganiser(null);
-			}
-			for(Notification not: emp.getNotifications()) {
-				not.setToEmp(null);
-			}
-			return new ResponseEntity<Employee>(emp, HttpStatus.OK);
+			return new ResponseEntity<List<Employee>>(empList, HttpStatus.OK);
 		} catch (EmployeeException e) {
 			return new ResponseEntity("No Employee(s) Found. Please try again with a different search parameter.", HttpStatus.BAD_REQUEST);
 		}

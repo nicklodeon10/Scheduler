@@ -47,12 +47,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public Employee searchByName(String name) throws EmployeeException {
-		Employee emp = employeeRepository.findByEmpName(name).get(0);
-		if (emp == null) {
+	public List<Employee> searchByName(String name) throws EmployeeException {
+		List<Employee> empList = employeeRepository.findByEmpName(name);
+		if (empList.size()==0) {
 			throw new EmployeeException("Employee Not Found.");
 		}
-		return emp;
+		return empList;
 	}
 
 	@Override

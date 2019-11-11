@@ -29,7 +29,7 @@ import com.cg.scheduler.service.MeetingService;
 
 @RestController
 @RequestMapping("meeting")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class MeetingController {
 
 	@Autowired
@@ -48,6 +48,7 @@ public class MeetingController {
 			participantStatus+="nores ";
 		}
 		meeting.setParticipantStatus(participantStatus);
+		meeting.setActive(true);
 		try {
 			meeting.setOrganiser(employeeService.searchById(organiserId));
 			newMeeting = meetingService.addMeeting(meeting);
