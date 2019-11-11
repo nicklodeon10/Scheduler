@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,8 @@ import com.cg.scheduler.repository.MeetingRepository;
 @Service("meetingService")
 @Transactional
 public class MeetingServiceImpl implements MeetingService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(MeetingServiceImpl.class);
 
 	@Autowired
 	MeetingRepository meetingRepository;
@@ -46,8 +50,10 @@ public class MeetingServiceImpl implements MeetingService {
 	public Meeting addMeeting(Meeting meeting) throws MeetingException {
 		Meeting addedMeeting;
 		try {
+			logger.info("Saving");
 			addedMeeting = meetingRepository.save(meeting);
 		} catch (Exception exception) {
+			logger.error("Error Adding Meeting.");
 			throw new MeetingException("Error Adding Meeting.");
 		}
 		// Notify all Participants
@@ -72,6 +78,7 @@ public class MeetingServiceImpl implements MeetingService {
 			try {
 				notificationService.add(notification);
 			} catch (NotificationException exception) {
+				logger.error("Error in adding Notification.");
 				throw new MeetingException("Error in adding Notification.");
 			}
 		}
@@ -83,13 +90,16 @@ public class MeetingServiceImpl implements MeetingService {
 		try {
 			reminder.setEmp(employeeService.searchById(meeting.getOrganiser().getEmpId()));
 		} catch (NumberFormatException e) {
+			logger.error("Error in adding reminders. Could not parse Organiser.");
 			throw new MeetingException("Error in adding reminders. Could not parse Organiser.");
 		} catch (EmployeeException e) {
+			logger.error("Error in adding reminders. Could not find Employee.");
 			throw new MeetingException("Error in adding reminders. Could not find Employee.");
 		}
 		try {
 			reminderService.create(reminder);
 		} catch (ReminderException e) {
+			logger.error("Error in adding reminder");
 			throw new MeetingException("Error in adding reminder");
 		}
 		return addedMeeting;
@@ -97,6 +107,7 @@ public class MeetingServiceImpl implements MeetingService {
 
 	@Override
 	public List<Meeting> read() throws MeetingException {
+		logger.info("Searching");
 		List<Meeting> meetingList = meetingRepository.findAll();
 		if (meetingList.size() == 0) {
 			throw new MeetingException("No Meetings Found.");
@@ -108,6 +119,7 @@ public class MeetingServiceImpl implements MeetingService {
 	public List<Meeting> viewOrganisedByEmployee(Long empId) throws MeetingException {
 		List<Meeting> meetingList;
 		try {
+			logger.info("Searching");
 			meetingList = meetingRepository.findByOrganiser(employeeService.searchById(empId));
 		} catch (EmployeeException e) {
 			throw new MeetingException("No Employee foudn for ID: " + empId);
@@ -122,6 +134,7 @@ public class MeetingServiceImpl implements MeetingService {
 	public Meeting update(Meeting meeting) throws MeetingException {
 		Meeting updatedMeeting;
 		try {
+			logger.info("Searching");
 			updatedMeeting = meetingRepository.save(meeting);
 		} catch (Exception exception) {
 			throw new MeetingException("Error Adding Meeting.");
@@ -133,6 +146,7 @@ public class MeetingServiceImpl implements MeetingService {
 	public boolean cancel(Long meetingId) throws MeetingException {
 		Meeting meeting;
 		try {
+			logger.info("Searching");
 			meeting = meetingRepository.findById(meetingId).get();
 			meeting.setActive(false);
 			meetingRepository.save(meeting);
@@ -144,6 +158,7 @@ public class MeetingServiceImpl implements MeetingService {
 
 	@Override
 	public Meeting approve(Long empId, Long meetingId) throws MeetingException {
+		logger.info("Approving");
 		Meeting meeting = meetingRepository.findById(meetingId).get();
 		String[] idTokens = meeting.getParticipants().split(" ");
 		String[] statusTokens = meeting.getParticipantStatus().split(" ");
@@ -194,6 +209,7 @@ public class MeetingServiceImpl implements MeetingService {
 
 	@Override
 	public Meeting maybe(Long empId, Long meetingId) throws MeetingException {
+		logger.info("Maybe-ing");
 		Meeting meeting = meetingRepository.findById(meetingId).get();
 		String[] idTokens = meeting.getParticipants().split(" ");
 		String[] statusTokens = meeting.getParticipantStatus().split(" ");
@@ -234,6 +250,7 @@ public class MeetingServiceImpl implements MeetingService {
 
 	@Override
 	public Meeting cancel(Long empId, Long meetingId) throws MeetingException {
+		logger.info("Cancelling");
 		Meeting meeting = meetingRepository.findById(meetingId).get();
 		String[] idTokens = meeting.getParticipants().split(" ");
 		String[] statusTokens = meeting.getParticipantStatus().split(" ");
@@ -274,6 +291,7 @@ public class MeetingServiceImpl implements MeetingService {
 
 	@Override
 	public List<Meeting> viewUpcoming(Long empId) throws MeetingException {
+		logger.info("Searching");
 		List<Meeting> meetingList=meetingRepository.findAll();
 		List<Meeting> upcomingList=new ArrayList<>();
 		for(Meeting meeting: meetingList) {
@@ -299,6 +317,7 @@ public class MeetingServiceImpl implements MeetingService {
 
 	@Override
 	public List<Meeting> viewPastMeetings(Long empId) throws MeetingException {
+		logger.info("Searching");
 		List<Meeting> meetingList=meetingRepository.findAll();
 		List<Meeting> pastList=new ArrayList<>();
 		for(Meeting meeting: meetingList) {
@@ -324,6 +343,7 @@ public class MeetingServiceImpl implements MeetingService {
 
 	@Override
 	public int upcomingMeetingsCount(Long empId) throws MeetingException {
+		logger.info("Searching");
 		List<Meeting> meetingList=viewUpcoming(empId);
 		for(Meeting meeting: meetingList) {
 			if(!meeting.isActive())
@@ -334,6 +354,7 @@ public class MeetingServiceImpl implements MeetingService {
 
 	@Override
 	public Meeting getNext(Long empId) throws MeetingException {
+		logger.info("Searching");
 		List<Meeting> meetingList=viewUpcoming(empId);
 		Meeting nextMeeting=meetingList.get(0);
 		for(Meeting meeting:meetingList) {

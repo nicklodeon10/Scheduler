@@ -4,13 +4,22 @@
 package com.cg.scheduler.dto;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
 /**
  * @author Devang created: 04/11/2019
@@ -28,6 +37,20 @@ public class Reminder {
 	private Employee emp;
 	private LocalDateTime dueTime;
 	private boolean active;
+	@Column(name = "created_date", nullable = false, updatable = false)
+	@CreatedDate
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdDate;
+	@Column(name = "modified_date")
+	@LastModifiedDate
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date modifiedDate;
+	@Column(name = "created_by")
+	@CreatedBy
+	private String createdBy;
+	@Column(name = "modified_by")
+	@LastModifiedBy
+	private String modifiedBy;
 
 	public Reminder() {
 		super();
