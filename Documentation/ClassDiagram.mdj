@@ -373,7 +373,7 @@
 											"top": 297,
 											"width": 298.02880859375,
 											"height": 13,
-											"text": "+scheduleMeeting()",
+											"text": "+scheduleMeeting(meeting: Meeting): Meeting",
 											"horizontalAlignment": 0
 										},
 										{
@@ -390,7 +390,7 @@
 											"top": 312,
 											"width": 298.02880859375,
 											"height": 13,
-											"text": "+viewMeetings()",
+											"text": "+viewMeetings(): List<Meeting>",
 											"horizontalAlignment": 0
 										},
 										{
@@ -407,7 +407,7 @@
 											"top": 327,
 											"width": 298.02880859375,
 											"height": 13,
-											"text": "+cancelMeeting()",
+											"text": "+cancelMeeting(): Boolean",
 											"horizontalAlignment": 0
 										},
 										{
@@ -424,7 +424,7 @@
 											"top": 342,
 											"width": 298.02880859375,
 											"height": 13,
-											"text": "+viewNotifications()",
+											"text": "+viewNotifications(): List<Notification>",
 											"horizontalAlignment": 0
 										},
 										{
@@ -441,7 +441,7 @@
 											"top": 357,
 											"width": 298.02880859375,
 											"height": 13,
-											"text": "+responseApproveMeeting()",
+											"text": "+responseApproveMeeting(): Meeting",
 											"horizontalAlignment": 0
 										},
 										{
@@ -458,7 +458,7 @@
 											"top": 372,
 											"width": 298.02880859375,
 											"height": 13,
-											"text": "+responseCancelMeeting()",
+											"text": "+responseCancelMeeting(): Meeting",
 											"horizontalAlignment": 0
 										},
 										{
@@ -475,7 +475,7 @@
 											"top": 387,
 											"width": 298.02880859375,
 											"height": 13,
-											"text": "+responseMaybeMeeting()",
+											"text": "+responseMaybeMeeting(): Meeting",
 											"horizontalAlignment": 0
 										},
 										{
@@ -492,7 +492,7 @@
 											"top": 402,
 											"width": 298.02880859375,
 											"height": 13,
-											"text": "+addReminder()",
+											"text": "+addReminder(Reminder reminder): Reminder",
 											"horizontalAlignment": 0
 										},
 										{
@@ -509,7 +509,7 @@
 											"top": 417,
 											"width": 298.02880859375,
 											"height": 13,
-											"text": "+viewReminders()",
+											"text": "+viewReminders(): List<Reminder>",
 											"horizontalAlignment": 0
 										},
 										{
@@ -526,7 +526,7 @@
 											"top": 432,
 											"width": 298.02880859375,
 											"height": 13,
-											"text": "+cancelReminder()",
+											"text": "+cancelReminder(): Boolean",
 											"horizontalAlignment": 0
 										}
 									],
@@ -793,13 +793,30 @@
 											"height": 13,
 											"text": "+seen: boolean",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFuW5B58JfwD58=",
+											"_parent": {
+												"$ref": "AAAAAAFuNQbOcd8D7fk="
+											},
+											"model": {
+												"$ref": "AAAAAAFuW5B5VpftHj8="
+											},
+											"font": "Arial;13;0",
+											"left": 693,
+											"top": 688,
+											"width": 151,
+											"height": 13,
+											"text": "+meetingId: Long",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 688,
 									"top": 593,
 									"width": 161,
-									"height": 98
+									"height": 113
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -812,7 +829,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 688,
-									"top": 691,
+									"top": 706,
 									"width": 161,
 									"height": 10
 								},
@@ -854,7 +871,7 @@
 							"left": 688,
 							"top": 568,
 							"width": 161,
-							"height": 137,
+							"height": 148,
 							"nameCompartment": {
 								"$ref": "AAAAAAFuNQbOcd7+iys="
 							},
@@ -1020,7 +1037,7 @@
 											"top": 628,
 											"width": 148.59228515625,
 											"height": 13,
-											"text": "-emp: Long",
+											"text": "-emp: Employee",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1996,7 +2013,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 753,
-									"top": 499,
+									"top": 500,
 									"width": 55.9990234375,
 									"height": 13,
 									"alpha": 1.3963737149824136,
@@ -2061,7 +2078,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 745,
-									"top": 465,
+									"top": 466,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -2144,7 +2161,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 773,
+									"left": 772,
 									"top": 527,
 									"height": 13,
 									"alpha": -0.7853981633974483,
@@ -2211,7 +2228,7 @@
 								"$ref": "AAAAAAFuNQQMrd6ga5g="
 							},
 							"lineStyle": 1,
-							"points": "725:450;752:567",
+							"points": "725:450;751:567",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFuNRp1IeHCyJs="
@@ -2523,7 +2540,31 @@
 							"_parent": {
 								"$ref": "AAAAAAFuNQQMrN6ettU="
 							},
-							"name": "scheduleMeeting"
+							"name": "scheduleMeeting",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFuW5Ev8Jnk20s=",
+									"_parent": {
+										"$ref": "AAAAAAFuNREHzOBX1uk="
+									},
+									"name": "meeting",
+									"type": {
+										"$ref": "AAAAAAFuNQt9L9+p830="
+									}
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFuW5Ev8ZnloMk=",
+									"_parent": {
+										"$ref": "AAAAAAFuNREHzOBX1uk="
+									},
+									"type": {
+										"$ref": "AAAAAAFuNQt9L9+p830="
+									},
+									"direction": "return"
+								}
+							]
 						},
 						{
 							"_type": "UMLOperation",
@@ -2531,7 +2572,18 @@
 							"_parent": {
 								"$ref": "AAAAAAFuNQQMrN6ettU="
 							},
-							"name": "viewMeetings"
+							"name": "viewMeetings",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFuW5FduJo6GwY=",
+									"_parent": {
+										"$ref": "AAAAAAFuNRSplOCfHq4="
+									},
+									"type": "List<Meeting>",
+									"direction": "return"
+								}
+							]
 						},
 						{
 							"_type": "UMLOperation",
@@ -2539,7 +2591,18 @@
 							"_parent": {
 								"$ref": "AAAAAAFuNQQMrN6ettU="
 							},
-							"name": "cancelMeeting"
+							"name": "cancelMeeting",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFuW5GkmpqOIwE=",
+									"_parent": {
+										"$ref": "AAAAAAFuNRKawOCINsY="
+									},
+									"type": "Boolean",
+									"direction": "return"
+								}
+							]
 						},
 						{
 							"_type": "UMLOperation",
@@ -2547,7 +2610,18 @@
 							"_parent": {
 								"$ref": "AAAAAAFuNQQMrN6ettU="
 							},
-							"name": "viewNotifications"
+							"name": "viewNotifications",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFuW5HS/ZrZo9A=",
+									"_parent": {
+										"$ref": "AAAAAAFuNRFZD+Be0Xo="
+									},
+									"type": "List<Notification>",
+									"direction": "return"
+								}
+							]
 						},
 						{
 							"_type": "UMLOperation",
@@ -2555,7 +2629,20 @@
 							"_parent": {
 								"$ref": "AAAAAAFuNQQMrN6ettU="
 							},
-							"name": "responseApproveMeeting"
+							"name": "responseApproveMeeting",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFuW5HvsZskZNY=",
+									"_parent": {
+										"$ref": "AAAAAAFuNRGtwOBlz18="
+									},
+									"type": {
+										"$ref": "AAAAAAFuNQt9L9+p830="
+									},
+									"direction": "return"
+								}
+							]
 						},
 						{
 							"_type": "UMLOperation",
@@ -2563,7 +2650,20 @@
 							"_parent": {
 								"$ref": "AAAAAAFuNQQMrN6ettU="
 							},
-							"name": "responseCancelMeeting"
+							"name": "responseCancelMeeting",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFuW5IIopt49DI=",
+									"_parent": {
+										"$ref": "AAAAAAFuNRHYaOBsObU="
+									},
+									"type": {
+										"$ref": "AAAAAAFuNQt9L9+p830="
+									},
+									"direction": "return"
+								}
+							]
 						},
 						{
 							"_type": "UMLOperation",
@@ -2571,7 +2671,20 @@
 							"_parent": {
 								"$ref": "AAAAAAFuNQQMrN6ettU="
 							},
-							"name": "responseMaybeMeeting"
+							"name": "responseMaybeMeeting",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFuW5Idw5vDSuA=",
+									"_parent": {
+										"$ref": "AAAAAAFuNRHwQuBz5Uo="
+									},
+									"type": {
+										"$ref": "AAAAAAFuNQt9L9+p830="
+									},
+									"direction": "return"
+								}
+							]
 						},
 						{
 							"_type": "UMLOperation",
@@ -2579,7 +2692,29 @@
 							"_parent": {
 								"$ref": "AAAAAAFuNQQMrN6ettU="
 							},
-							"name": "addReminder"
+							"name": "addReminder",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFuW5JTN5wXuc8=",
+									"_parent": {
+										"$ref": "AAAAAAFuNRIOg+B6S+c="
+									},
+									"name": "Reminder reminder",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFuW5JTOJwYhKg=",
+									"_parent": {
+										"$ref": "AAAAAAFuNRIOg+B6S+c="
+									},
+									"type": {
+										"$ref": "AAAAAAFuNQl90d9XL7g="
+									},
+									"direction": "return"
+								}
+							]
 						},
 						{
 							"_type": "UMLOperation",
@@ -2587,7 +2722,18 @@
 							"_parent": {
 								"$ref": "AAAAAAFuNQQMrN6ettU="
 							},
-							"name": "viewReminders"
+							"name": "viewReminders",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFuW5J/yZxtfU0=",
+									"_parent": {
+										"$ref": "AAAAAAFuNRKDPOCB9TM="
+									},
+									"type": "List<Reminder>",
+									"direction": "return"
+								}
+							]
 						},
 						{
 							"_type": "UMLOperation",
@@ -2595,7 +2741,18 @@
 							"_parent": {
 								"$ref": "AAAAAAFuNQQMrN6ettU="
 							},
-							"name": "cancelReminder"
+							"name": "cancelReminder",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFuW5Koqpy41U4=",
+									"_parent": {
+										"$ref": "AAAAAAFuNRVhZuCmNI4="
+									},
+									"type": "Boolean",
+									"direction": "return"
+								}
+							]
 						}
 					]
 				},
@@ -2667,6 +2824,15 @@
 							},
 							"name": "seen",
 							"type": "boolean"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFuW5B5VpftHj8=",
+							"_parent": {
+								"$ref": "AAAAAAFuNQbOcd77YCI="
+							},
+							"name": "meetingId",
+							"type": "Long"
 						}
 					]
 				},
@@ -2706,7 +2872,9 @@
 							},
 							"name": "emp",
 							"visibility": "private",
-							"type": "Long"
+							"type": {
+								"$ref": "AAAAAAFuNQQMrN6ettU="
+							}
 						},
 						{
 							"_type": "UMLAttribute",
