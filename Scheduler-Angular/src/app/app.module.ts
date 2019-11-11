@@ -8,7 +8,7 @@ import { DashboardComponent } from './app.dashboardcomponent';
 import {ErrorPageComponent} from './app.errorpagecomponent';
 import { LoginComponent } from './app.logincomponent';
 import { RegisterComponent } from './app.registercomponent';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PastMeetingComponent } from './app.pastmeetingcomponent';
 import { AddMeetingComponent } from './app.addmeetingcomponent';
@@ -16,6 +16,7 @@ import { FormsModule } from "@angular/forms";
 import { Routes, RouterModule } from '@angular/router';
 import { ViewReminderComponent } from './app.viewremindercomponent';
 import { ViewNotificationComponent } from './app.viewnotificationcomponent';
+import { HttpErrorInterceptor } from './http-error.interceptor';
 
 const appRoutes:Routes=[
     {path:'',redirectTo: 'home', pathMatch: 'full'},
@@ -51,7 +52,11 @@ const appRoutes:Routes=[
         ViewReminderComponent,
         ViewNotificationComponent
 		],
-    providers: [ ],
+    providers: [{
+        provide: HTTP_INTERCEPTORS,
+        useClass: HttpErrorInterceptor,
+        multi: true
+    }],
     bootstrap: [AppComponent]
 })
 

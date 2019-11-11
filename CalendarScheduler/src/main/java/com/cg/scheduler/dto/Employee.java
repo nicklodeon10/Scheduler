@@ -35,13 +35,15 @@ public class Employee {
 	@OneToMany(mappedBy = "organiser", fetch = FetchType.LAZY)
 	private List<Meeting> meetings;
 	private boolean active;
+	private String roles;
 
 	public Employee() {
 		super();
 	}
 
 	public Employee(Long empId, String empName, String userName, String empPassword, String empPhone, String empEmail,
-			List<Notification> notifications, List<Reminder> reminders, List<Meeting> meetings, boolean active) {
+			List<Notification> notifications, List<Reminder> reminders, List<Meeting> meetings, boolean active,
+			String roles) {
 		super();
 		this.empId = empId;
 		this.empName = empName;
@@ -53,6 +55,15 @@ public class Employee {
 		this.reminders = reminders;
 		this.meetings = meetings;
 		this.active = active;
+		this.roles = roles;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [empId=" + empId + ", empName=" + empName + ", userName=" + userName + ", empPassword="
+				+ empPassword + ", empPhone=" + empPhone + ", empEmail=" + empEmail + ", notifications=" + notifications
+				+ ", reminders=" + reminders + ", meetings=" + meetings + ", active=" + active + ", roles=" + roles
+				+ "]";
 	}
 
 	@Override
@@ -68,96 +79,73 @@ public class Employee {
 		result = prime * result + ((meetings == null) ? 0 : meetings.hashCode());
 		result = prime * result + ((notifications == null) ? 0 : notifications.hashCode());
 		result = prime * result + ((reminders == null) ? 0 : reminders.hashCode());
+		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
 		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		Employee other = (Employee) obj;
-		if (active != other.active) {
+		if (active != other.active)
 			return false;
-		}
 		if (empEmail == null) {
-			if (other.empEmail != null) {
+			if (other.empEmail != null)
 				return false;
-			}
-		} else if (!empEmail.equals(other.empEmail)) {
+		} else if (!empEmail.equals(other.empEmail))
 			return false;
-		}
 		if (empId == null) {
-			if (other.empId != null) {
+			if (other.empId != null)
 				return false;
-			}
-		} else if (!empId.equals(other.empId)) {
+		} else if (!empId.equals(other.empId))
 			return false;
-		}
 		if (empName == null) {
-			if (other.empName != null) {
+			if (other.empName != null)
 				return false;
-			}
-		} else if (!empName.equals(other.empName)) {
+		} else if (!empName.equals(other.empName))
 			return false;
-		}
 		if (empPassword == null) {
-			if (other.empPassword != null) {
+			if (other.empPassword != null)
 				return false;
-			}
-		} else if (!empPassword.equals(other.empPassword)) {
+		} else if (!empPassword.equals(other.empPassword))
 			return false;
-		}
 		if (empPhone == null) {
-			if (other.empPhone != null) {
+			if (other.empPhone != null)
 				return false;
-			}
-		} else if (!empPhone.equals(other.empPhone)) {
+		} else if (!empPhone.equals(other.empPhone))
 			return false;
-		}
 		if (meetings == null) {
-			if (other.meetings != null) {
+			if (other.meetings != null)
 				return false;
-			}
-		} else if (!meetings.equals(other.meetings)) {
+		} else if (!meetings.equals(other.meetings))
 			return false;
-		}
 		if (notifications == null) {
-			if (other.notifications != null) {
+			if (other.notifications != null)
 				return false;
-			}
-		} else if (!notifications.equals(other.notifications)) {
+		} else if (!notifications.equals(other.notifications))
 			return false;
-		}
 		if (reminders == null) {
-			if (other.reminders != null) {
+			if (other.reminders != null)
 				return false;
-			}
-		} else if (!reminders.equals(other.reminders)) {
+		} else if (!reminders.equals(other.reminders))
 			return false;
-		}
+		if (roles == null) {
+			if (other.roles != null)
+				return false;
+		} else if (!roles.equals(other.roles))
+			return false;
 		if (userName == null) {
-			if (other.userName != null) {
+			if (other.userName != null)
 				return false;
-			}
-		} else if (!userName.equals(other.userName)) {
+		} else if (!userName.equals(other.userName))
 			return false;
-		}
 		return true;
-	}
-	
-	@Override
-	public String toString() {
-		return "Employee [empId=" + empId + ", empName=" + empName + ", userName=" + userName + ", empPassword="
-				+ empPassword + ", empPhone=" + empPhone + ", empEmail=" + empEmail + ", notifications=" + notifications
-				+ ", reminders=" + reminders + ", meetings=" + meetings + ", active=" + active + "]";
 	}
 
 	public Long getEmpId() {
@@ -238,6 +226,14 @@ public class Employee {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public String getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
 	}
 
 }
