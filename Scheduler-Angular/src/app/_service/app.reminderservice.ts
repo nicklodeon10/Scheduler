@@ -10,14 +10,14 @@ export class ReminderService{
     constructor(private httpClient:HttpClient){}
 
     getUpcomingReminderCount(empId:number){
-        return this.httpClient.get('http://localhost:9088/reminder/getCount?empId='+empId);
+        return this.httpClient.get('http://13.233.124.218:9088/reminder/getCount?empId='+empId);
     }
 
     getUpcomingReminders(empId:number){
-        return this.httpClient.get('http://localhost:9088/reminder/upcoming/view?empId='+empId);
+        return this.httpClient.get('http://13.233.124.218:9088/reminder/upcoming/view?empId='+empId);
     }
 
     getAllReminders(empId:number){
-        return this.httpClient.get('http://localhost:9088/reminder/view?empId='+empId);
+        return this.httpClient.get('http://13.233.124.218:9088/reminder/view?empId='+empId);
     }
 }

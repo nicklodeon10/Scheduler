@@ -11,35 +11,35 @@ export class MeetingService{
     constructor(private httpClient:HttpClient){}
 
     addMeeting(meeting:Meeting, empId:number){
-        return this.httpClient.post('http://localhost:9088/meeting/add?organiserId='+empId,meeting);
+        return this.httpClient.post('http://13.233.124.218:9088/meeting/add?organiserId='+empId,meeting);
     }
 
     getUpcomingMeetingsCount(empId:number){
-        return this.httpClient.get('http://localhost:9088/meeting/getCount?empId='+empId);
+        return this.httpClient.get('http://13.233.124.218:9088/meeting/getCount?empId='+empId);
     }
 
     getMeetings(empId:number){
-        return this.httpClient.get('http://localhost:9088/meeting/upcoming/view?empId='+empId);
+        return this.httpClient.get('http://13.233.124.218:9088/meeting/upcoming/view?empId='+empId);
     }
 
     getNextMeeting(empId:number){
-        return this.httpClient.get('http://localhost:9088/meeting/getNext?empId='+empId);
+        return this.httpClient.get('http://13.233.124.218:9088/meeting/getNext?empId='+empId);
     }
 
     getPastMeetings(empId:number){
-        return this.httpClient.get('http://localhost:9088/meeting/past/view?empId='+empId);
+        return this.httpClient.get('http://13.233.124.218:9088/meeting/past/view?empId='+empId);
     }
 
     approveMeeting(meetingId:number, empId:number){
-        return this.httpClient.get('http://localhost:9088/meeting/respond/approve?empId='+empId+'&meetingId='+meetingId);
+        return this.httpClient.get('http://13.233.124.218:9088/meeting/respond/approve?empId='+empId+'&meetingId='+meetingId);
     }
 
     maybeMeeting(meetingId:number, empId:number){
-        return this.httpClient.get('http://localhost:9088/meeting/respond/maybe?empId='+empId+'&meetingId='+meetingId);
+        return this.httpClient.get('http://13.233.124.218:9088/meeting/respond/maybe?empId='+empId+'&meetingId='+meetingId);
     }
 
     cancelMeeting(meetingId:number, empId:number){
-        return this.httpClient.get('http://localhost:9088/meeting/respond/cancel?empId='+empId+'&meetingId='+meetingId);
+        return this.httpClient.get('http://13.233.124.218:9088/meeting/respond/cancel?empId='+empId+'&meetingId='+meetingId);
     }
 
 }

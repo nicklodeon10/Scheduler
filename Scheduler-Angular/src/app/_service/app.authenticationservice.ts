@@ -14,7 +14,7 @@ export class AuthenticationService {
 
   //Retrieves user token and checks authentication
   authenticate(username, password) {
-    return this.httpClient.post<any>('http://localhost:9088/employee/authenticate',
+    return this.httpClient.post<any>('http://13.233.124.218:9088/employee/authenticate',
     {username,password}).subscribe(
          userData => {
           sessionStorage.setItem('username',username);
@@ -38,7 +38,7 @@ export class AuthenticationService {
 
   //Retrieves role of user
   getRole(username:String){
-    return this.httpClient.get('http://localhost:9088/employee/getRole?username='+username);
+    return this.httpClient.get('http://13.233.124.218:9088/employee/getRole?username='+username);
   }
 
 }

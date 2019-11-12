@@ -41,20 +41,6 @@ public class Meeting {
 	private String participantStatus;
 	private String location;
 	private boolean active;
-	@Column(name = "created_date", nullable = false, updatable = false)
-	@CreatedDate
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdDate;
-	@Column(name = "modified_date")
-	@LastModifiedDate
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date modifiedDate;
-	@Column(name = "created_by")
-	@CreatedBy
-	private String createdBy;
-	@Column(name = "modified_by")
-	@LastModifiedBy
-	private String modifiedBy;
 	
 	public Meeting() {
 		super();

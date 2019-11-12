@@ -11,15 +11,15 @@ export class EmployeeService{
     constructor(private httpClient:HttpClient){}
 
     searchByName(empName:String){
-        return this.httpClient.get('http://localhost:9088/employee/search/name?empName='+empName);
+        return this.httpClient.get('http://13.233.124.218:9088/employee/search/name?empName='+empName);
     }
 
     searchByEmail(empEmail:String){
-        return this.httpClient.get('http://localhost:9088/employee/search/email?empEmail='+empEmail);
+        return this.httpClient.get('http://13.233.124.218:9088/employee/search/email?empEmail='+empEmail);
     }
 
     addEmployee(employee:Employee){
-        return this.httpClient.post('http://localhost:9088/employee/add', employee);
+        return this.httpClient.post('http://13.233.124.218:9088/employee/add', employee);
     }
 
 }

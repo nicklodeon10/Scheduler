@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.annotation.security.PermitAll;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +40,7 @@ import com.cg.scheduler.service.UserDetailsServiceImpl;
 
 @RestController
 @RequestMapping("employee")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://13.233.124.218:4200")
 public class EmployeeController {
 	
 	@Autowired
@@ -52,6 +54,8 @@ public class EmployeeController {
 
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
+	
+	private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
 	//Generates and retrieves token
 	@PostMapping("/authenticate")
@@ -61,20 +65,20 @@ public class EmployeeController {
 		final UserDetails userDetails = userDetailsService
 				.loadUserByUsername(authenticationRequest.getUsername());
 		final String token = jwtTokenUtil.generateToken(userDetails);
-		System.out.println("Generating Token");
+		logger.info("Generating Token");
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
 	
 	//Checks if user is authenticated or not
 	private void authenticate(String username, String password) throws Exception {
 		try {
-			System.out.println("Authenticating");
+			logger.info("Authenticating");
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 		} catch (DisabledException e) {
-			System.out.println("Auth Error");
+			logger.info("Auth Error");
 			throw new Exception("USER_DISABLED", e);
 		} catch (BadCredentialsException e) {
-			System.out.println("Auth Error");
+			logger.info("Auth Error");
 			throw new Exception("INVALID_CREDENTIALS", e);
 		}
 	}
@@ -83,47 +87,56 @@ public class EmployeeController {
 	@GetMapping("/getRole")
 	public ResponseEntity<Employee> getRole(@RequestParam("username") String username){
 		try {
-			System.out.println("Finding User Role");
+			logger.info("Finding User Role");
 			Employee user=employeeService.searchByUsername(username);
 			user.setEmpPassword("******");
-			System.out.println("Returning User for role");
+			logger.info("Returning User for role");
 			user.setMeetings(null);
 			user.setNotifications(null);
 			user.setReminders(null);
 			return new ResponseEntity<Employee>(user, HttpStatus.OK);
 		} catch (EmployeeException e) {
-			System.out.println("Error in fetching");
+			logger.info("Error in fetching");
 			return new ResponseEntity("Error", HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	//Add a Employee
 	@PostMapping("add")
 	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
 		try {
+			logger.info("Adding Employee");
 			employee.setRoles("ROLE_USER");
 			return new ResponseEntity<Employee>(employeeService.create(employee), HttpStatus.OK);
 		} catch (EmployeeException e) {
+			logger.error("Error Adding Employee. Please try Again.");
 			return new ResponseEntity("Error Adding Employee. Please try Again.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
+	//Search by Email
 	@GetMapping("search/email")
 	public ResponseEntity<Employee> searchEmployeeByEmail(@RequestParam("empEmail") String email){
 		Employee emp;
 		try {
+			logger.info("Searching");
 			emp=employeeService.searchByEmail(email);
 			emp.setMeetings(null);
 			emp.setNotifications(null);
 			emp.setReminders(null);
 			return new ResponseEntity<Employee>(emp, HttpStatus.OK);
 		} catch (EmployeeException e) {
+			logger.error("No Employee(s) Found.");
 			return new ResponseEntity("No Employee(s) Found. Please try again with a different search parameter.", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
+	//Search By Name
 	@GetMapping("search/name")
 	public ResponseEntity<List<Employee>> searchEmployeeByName(@RequestParam("empName") String name){
 		List<Employee> empList;
 		try {
+			logger.info("Searching.");
 			empList=employeeService.searchByName(name);
 			for(Employee emp: empList) {
 				emp.setMeetings(null);
@@ -132,6 +145,7 @@ public class EmployeeController {
 			}
 			return new ResponseEntity<List<Employee>>(empList, HttpStatus.OK);
 		} catch (EmployeeException e) {
+			logger.error("No Employee(s) Found.");
 			return new ResponseEntity("No Employee(s) Found. Please try again with a different search parameter.", HttpStatus.BAD_REQUEST);
 		}
 	}

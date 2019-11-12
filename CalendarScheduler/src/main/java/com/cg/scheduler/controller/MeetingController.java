@@ -5,6 +5,8 @@ package com.cg.scheduler.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +31,7 @@ import com.cg.scheduler.service.MeetingService;
 
 @RestController
 @RequestMapping("meeting")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://13.233.124.218:4200")
 public class MeetingController {
 
 	@Autowired
@@ -37,7 +39,10 @@ public class MeetingController {
 
 	@Autowired
 	EmployeeService employeeService;
+	
+	private static final Logger logger = LoggerFactory.getLogger(MeetingController.class);
 
+	//Add a new meeting
 	@PostMapping("add")
 	public ResponseEntity<Meeting> scheduleMeeting(@RequestBody Meeting meeting,
 			@RequestParam("organiserId") Long organiserId) {
@@ -63,6 +68,7 @@ public class MeetingController {
 		return new ResponseEntity<Meeting>(newMeeting, HttpStatus.OK);
 	}
 
+	//View meetings for employee
 	@GetMapping("view")
 	public ResponseEntity<List<Meeting>> getMeetingsForEmployee(@RequestParam("empId") Long empId) {
 		List<Meeting> meetingList;
@@ -79,6 +85,7 @@ public class MeetingController {
 		return new ResponseEntity<List<Meeting>>(meetingList, HttpStatus.OK);
 	}
 
+	//Cancel a meeting
 	@PostMapping("cancel")
 	public ResponseEntity<String> cancelMeeting(@RequestParam("meetingId") Long meetingId) {
 		try {
@@ -89,6 +96,7 @@ public class MeetingController {
 		return new ResponseEntity<String>("Meeting Cancelled.", HttpStatus.OK);
 	}
 
+	//Approve Meeting Request
 	@GetMapping("respond/approve")
 	public ResponseEntity<Meeting> respondApproveMeeting(@RequestParam("empId") Long empId,
 			@RequestParam("meetingId") Long meetingId) {
@@ -104,6 +112,7 @@ public class MeetingController {
 		return new ResponseEntity<Meeting>(meeting, HttpStatus.OK);
 	}
 	
+	//Maybe Meeting Request
 	@GetMapping("respond/maybe")
 	public ResponseEntity<Meeting> respondMaybeMeeting(@RequestParam("empId") Long empId,
 			@RequestParam("meetingId") Long meetingId) {
@@ -119,6 +128,7 @@ public class MeetingController {
 		return new ResponseEntity<Meeting>(meeting, HttpStatus.OK);
 	}
 	
+	//Cancel Meeting Request
 	@GetMapping("respond/cancel")
 	public ResponseEntity<Meeting> respondCancelMeeting(@RequestParam("empId") Long empId,
 			@RequestParam("meetingId") Long meetingId) {
@@ -134,6 +144,7 @@ public class MeetingController {
 		return new ResponseEntity<Meeting>(meeting, HttpStatus.OK);
 	}
 
+	//View Upcoming Meetings
 	@GetMapping("upcoming/view")
 	public ResponseEntity<List<Meeting>> viewUpcomingMeetings(@RequestParam("empId") Long empId){
 		List<Meeting> meetingList;
@@ -150,6 +161,7 @@ public class MeetingController {
 		return new ResponseEntity<List<Meeting>>(meetingList, HttpStatus.OK);
 	}
 	
+	//View Past Meetings
 	@GetMapping("past/view")
 	public ResponseEntity<List<Meeting>> viewPastMeetings(@RequestParam("empId") Long empId){
 		List<Meeting> meetingList;
@@ -166,6 +178,7 @@ public class MeetingController {
 		return new ResponseEntity<List<Meeting>>(meetingList, HttpStatus.OK);
 	}
 	
+	//Get Meeting Count
 	@GetMapping("getCount")
 	public ResponseEntity<Integer> getCount(@RequestParam("empId")Long empId){
 		try {
@@ -175,6 +188,7 @@ public class MeetingController {
 		}
 	}
 	
+	//Get Next Meeting
 	@GetMapping("getNext")
 	public ResponseEntity<Meeting> getNext(@RequestParam("empId")Long empId){
 		Meeting meeting;
